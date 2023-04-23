@@ -47,7 +47,7 @@ class UserController: RouteCollection {
     
     func register(req: Request) async throws -> User {
         
-        // validate
+        // validate the request
         try User.validate(content: req)
         
         let user = try req.content.decode(User.self)
