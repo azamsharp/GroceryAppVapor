@@ -9,6 +9,6 @@ import Foundation
 
 struct LoginResponse: Decodable {
     let error: Bool
-    let reason: String? 
-    let token: String
+    let reason: String?
+    let token: String?
 }

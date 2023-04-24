@@ -23,6 +23,19 @@
 		8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1B29F71CE600232EBF /* LoginResponse.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD94B3C29F72E0800232EBF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8DD94AD329F56A8700232EBF /* GroceryAppClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryAppClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryAppClientApp.swift; sourceTree = "<group>"; };
@@ -58,6 +71,7 @@
 			children = (
 				8DD94AD529F56A8700232EBF /* GroceryAppClient */,
 				8DD94AD429F56A8700232EBF /* Products */,
+				8DD94B3929F72E0800232EBF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +153,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		8DD94B3929F72E0800232EBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +170,7 @@
 				8DD94ACF29F56A8700232EBF /* Sources */,
 				8DD94AD029F56A8700232EBF /* Frameworks */,
 				8DD94AD129F56A8700232EBF /* Resources */,
+				8DD94B3C29F72E0800232EBF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
