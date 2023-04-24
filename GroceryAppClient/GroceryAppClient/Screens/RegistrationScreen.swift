@@ -22,16 +22,10 @@ struct RegistrationScreen: View {
     
     private func register() async {
         
-        do {
-            let registrationResponse = try await model.register(username: username, password: password)
-            if !registrationResponse.error {
-                // go to the grocery category list screen
-                appState.routes.append(.groceryCategoryList)
-            } else {
-                errorMessage = registrationResponse.reason ?? ""
-            }
-        } catch {
-            errorMessage = error.localizedDescription
+        let registered = await model.register(username: username, password: password)
+        if registered {
+            // go to the grocery category list screen
+            appState.routes.append(.login)
         }
     }
     
@@ -48,7 +42,10 @@ struct RegistrationScreen: View {
                 }
             }.disabled(!isFormValid)
             
-            Text(errorMessage)
+            if let error = model.lastError {
+                Text(error.localizedDescription)
+            }
+            
             
         }.navigationTitle("Registration")
     }

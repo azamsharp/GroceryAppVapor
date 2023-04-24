@@ -19,6 +19,8 @@
 		8DD94AF629F5F7E200232EBF /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF529F5F7E200232EBF /* RegistrationResponse.swift */; };
 		8DD94AF829F6FD2A00232EBF /* GroceryCategoryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */; };
 		8DD94AFB29F703C000232EBF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AFA29F703C000232EBF /* AppState.swift */; };
+		8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1929F71A7B00232EBF /* LoginScreen.swift */; };
+		8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1B29F71CE600232EBF /* LoginResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategoryListScreen.swift; sourceTree = "<group>"; };
 		8DD94AF929F700E500232EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8DD94AFA29F703C000232EBF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		8DD94B1929F71A7B00232EBF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		8DD94B1B29F71CE600232EBF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 			children = (
 				8DD94AE529F5716900232EBF /* RegistrationScreen.swift */,
 				8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */,
+				8DD94B1929F71A7B00232EBF /* LoginScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 				8DD94AEB29F579A700232EBF /* GroceryModel.swift */,
 				8DD94AF529F5F7E200232EBF /* RegistrationResponse.swift */,
 				8DD94AFA29F703C000232EBF /* AppState.swift */,
+				8DD94B1B29F71CE600232EBF /* LoginResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 			files = (
 				8DD94AE929F574AE00232EBF /* String+Extensions.swift in Sources */,
 				8DD94AFB29F703C000232EBF /* AppState.swift in Sources */,
+				8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */,
 				8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */,
 				8DD94AF129F5F05000232EBF /* HTTPClient.swift in Sources */,
 				8DD94AE629F5716900232EBF /* RegistrationScreen.swift in Sources */,
@@ -212,6 +219,7 @@
 				8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */,
 				8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */,
 				8DD94AF629F5F7E200232EBF /* RegistrationResponse.swift in Sources */,
+				8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */,
 				8DD94AF829F6FD2A00232EBF /* GroceryCategoryListScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

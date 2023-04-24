@@ -7,25 +7,36 @@
 
 import Foundation
 
-enum RegistrationError: Error {
-    case usernameTaken
-}
 
 enum NetworkError: Error {
     case badRequest
-    case invalidStatusCode(Int)
+    case serverError(String)
+}
+
+extension NetworkError: LocalizedError {
+    
+    var errorDescription: String? {
+        switch self {
+            case .badRequest:
+                return NSLocalizedString("Unable to perform request", comment: "badRequestError")
+            case .serverError(let errorMessage):
+                print(errorMessage)
+                return NSLocalizedString(errorMessage, comment: "serverError")
+        }
+    }
+    
 }
 
 struct HTTPClient {
     
     func register(username: String, password: String) async throws -> RegistrationResponse {
         
-        let registerRequest = ["username": username, "password": password]
+        let registerBody = ["username": username, "password": password]
         
         var request = URLRequest(url: Constants.Urls.registerUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(registerRequest)
+        request.httpBody = try JSONEncoder().encode(registerBody)
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
@@ -35,6 +46,26 @@ struct HTTPClient {
         
         let registrationResponse = try JSONDecoder().decode(RegistrationResponse.self, from: data)
         return registrationResponse
+    }
+    
+    func login(username: String, password: String) async throws -> LoginResponse {
+        
+        let loginBody = ["username": username, "password": password]
+        
+        var request = URLRequest(url: Constants.Urls.registerUrl)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(loginBody)
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let _ = response as? HTTPURLResponse else {
+            throw NetworkError.badRequest
+        }
+        
+        let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+        return loginResponse
+        
     }
     
 }

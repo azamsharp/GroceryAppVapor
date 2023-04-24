@@ -8,6 +8,7 @@
 import Foundation
 
 enum Route: Hashable {
+    case login
     case groceryCategoryList
 }
 
