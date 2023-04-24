@@ -13,6 +13,12 @@
 		8DD94ADE29F56A8800232EBF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD94ADD29F56A8800232EBF /* Preview Assets.xcassets */; };
 		8DD94AE629F5716900232EBF /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AE529F5716900232EBF /* RegistrationScreen.swift */; };
 		8DD94AE929F574AE00232EBF /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AE829F574AE00232EBF /* String+Extensions.swift */; };
+		8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AEB29F579A700232EBF /* GroceryModel.swift */; };
+		8DD94AF129F5F05000232EBF /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF029F5F05000232EBF /* HTTPClient.swift */; };
+		8DD94AF429F5F15700232EBF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF329F5F15700232EBF /* Constants.swift */; };
+		8DD94AF629F5F7E200232EBF /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF529F5F7E200232EBF /* RegistrationResponse.swift */; };
+		8DD94AF829F6FD2A00232EBF /* GroceryCategoryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */; };
+		8DD94AFB29F703C000232EBF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AFA29F703C000232EBF /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +29,13 @@
 		8DD94ADD29F56A8800232EBF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8DD94AE529F5716900232EBF /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
 		8DD94AE829F574AE00232EBF /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		8DD94AEB29F579A700232EBF /* GroceryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryModel.swift; sourceTree = "<group>"; };
+		8DD94AF029F5F05000232EBF /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		8DD94AF329F5F15700232EBF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8DD94AF529F5F7E200232EBF /* RegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationResponse.swift; sourceTree = "<group>"; };
+		8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategoryListScreen.swift; sourceTree = "<group>"; };
+		8DD94AF929F700E500232EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8DD94AFA29F703C000232EBF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +68,10 @@
 		8DD94AD529F56A8700232EBF /* GroceryAppClient */ = {
 			isa = PBXGroup;
 			children = (
+				8DD94AF929F700E500232EBF /* Info.plist */,
+				8DD94AF229F5F14C00232EBF /* Utils */,
+				8DD94AEF29F5F03500232EBF /* Clients */,
+				8DD94AEA29F5799300232EBF /* Models */,
 				8DD94AE729F574A100232EBF /* Extensions */,
 				8DD94AE429F56AB000232EBF /* Screens */,
 				8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */,
@@ -77,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD94AE529F5716900232EBF /* RegistrationScreen.swift */,
+				8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -87,6 +105,32 @@
 				8DD94AE829F574AE00232EBF /* String+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8DD94AEA29F5799300232EBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8DD94AEB29F579A700232EBF /* GroceryModel.swift */,
+				8DD94AF529F5F7E200232EBF /* RegistrationResponse.swift */,
+				8DD94AFA29F703C000232EBF /* AppState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8DD94AEF29F5F03500232EBF /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				8DD94AF029F5F05000232EBF /* HTTPClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		8DD94AF229F5F14C00232EBF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8DD94AF329F5F15700232EBF /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,9 +204,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD94AE929F574AE00232EBF /* String+Extensions.swift in Sources */,
+				8DD94AFB29F703C000232EBF /* AppState.swift in Sources */,
+				8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */,
+				8DD94AF129F5F05000232EBF /* HTTPClient.swift in Sources */,
 				8DD94AE629F5716900232EBF /* RegistrationScreen.swift in Sources */,
+				8DD94AF429F5F15700232EBF /* Constants.swift in Sources */,
 				8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */,
 				8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */,
+				8DD94AF629F5F7E200232EBF /* RegistrationResponse.swift in Sources */,
+				8DD94AF829F6FD2A00232EBF /* GroceryCategoryListScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +344,7 @@
 				DEVELOPMENT_TEAM = B2Q8EGNCQA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = GroceryAppClient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -323,7 +373,7 @@
 				DEVELOPMENT_TEAM = B2Q8EGNCQA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = GroceryAppClient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

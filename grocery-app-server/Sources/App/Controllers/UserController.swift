@@ -45,16 +45,25 @@ class UserController: RouteCollection {
         ]
     }
     
-    func register(req: Request) async throws -> User {
+    func register(req: Request) async throws -> RegistrationResponse {
         
         // validate the request
         try User.validate(content: req)
         
         let user = try req.content.decode(User.self)
+        
+        // find if the user already exist
+        if let _ = try await User.query(on: req.db)
+            .filter(\.$username == user.username)
+            .first() {
+            // username already taken
+            throw Abort(.conflict, reason: "Username is already taken")
+        }
+        
         // hash the password
         user.password = try await req.password.async.hash(user.password)
         try await user.save(on: req.db)
-        return user
+        return RegistrationResponse(error: false)
     }
     
 }

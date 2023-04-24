@@ -9,20 +9,47 @@ import SwiftUI
 
 struct RegistrationScreen: View {
     
+    @EnvironmentObject private var model: GroceryModel
+    @EnvironmentObject private var appState: AppState
+    
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var errorMessage: String = ""
     
     private var isFormValid: Bool {
-        !username.isEmptyOrWhiteSpace && !password.isEmptyOrWhiteSpace
+        !username.isEmptyOrWhiteSpace && !password.isEmptyOrWhiteSpace && (password.count >= 6 && password.count <= 10)
+    }
+    
+    private func register() async {
+        
+        do {
+            let registrationResponse = try await model.register(username: username, password: password)
+            if !registrationResponse.error {
+                // go to the grocery category list screen
+                appState.routes.append(.groceryCategoryList)
+            } else {
+                errorMessage = registrationResponse.reason ?? ""
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
     
     var body: some View {
         Form {
             TextField("Username", text: $username)
+                .textInputAutocapitalization(.never)
             SecureField("Password", text: $password)
+            Text("Must be between 6 and 10 characters")
+                .font(.caption)
             Button("Register") {
-                
+                Task {
+                    await register()
+                }
             }.disabled(!isFormValid)
+            
+            Text(errorMessage)
+            
         }.navigationTitle("Registration")
     }
 }
@@ -31,6 +58,8 @@ struct RegistrationScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             RegistrationScreen()
+                .environmentObject(GroceryModel())
+                .environmentObject(AppState())
         }
     }
 }
