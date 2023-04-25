@@ -49,7 +49,7 @@ struct HTTPClient {
             case 409:
                 throw NetworkError.serverError("Username is already taken.")
             default:
-                throw NetworkError.badRequest
+                throw NetworkError.serverError("Unknown error. Please try again later.")
         }
     }
     
