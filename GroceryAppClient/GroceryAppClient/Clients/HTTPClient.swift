@@ -47,9 +47,9 @@ struct HTTPClient {
             case 200...201:
                 return true
             case 409:
-                throw NetworkError.serverError("Username is already taken.")
+                throw NetworkError.serverError(Constants.Messages.usernameTaken)
             default:
-                throw NetworkError.serverError("Unknown error. Please try again later.")
+                throw NetworkError.serverError(Constants.Messages.unknownError)
         }
     }
     
@@ -57,7 +57,7 @@ struct HTTPClient {
         
         let loginBody = ["username": username, "password": password]
         
-        var request = URLRequest(url: Constants.Urls.registerUrl)
+        var request = URLRequest(url: Constants.Urls.loginUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(loginBody)

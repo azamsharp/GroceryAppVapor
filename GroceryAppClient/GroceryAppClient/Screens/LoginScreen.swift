@@ -11,20 +11,20 @@ struct LoginScreen: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var errorMessage: String?
     
+    @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var model: GroceryModel
     
     private func login() async {
         do {
-            let loginResponse = try await model.login(username: username, password: password)
-            if !loginResponse.error {
+            let isLoggedIn = try await model.login(username: username, password: password)
+            if isLoggedIn {
                 // take user to the grocery category list screen
-                
-            } else {
-                // show error
+                appState.routes.append(.groceryCategoryList)
             }
         } catch {
-            
+            errorMessage = error.localizedDescription
         }
     }
     
@@ -37,6 +37,11 @@ struct LoginScreen: View {
                     await login()
                 }
             }
+            
+            if let errorMessage {
+                Text(errorMessage)
+            }
+            
         }.navigationTitle("Login")
     }
 }

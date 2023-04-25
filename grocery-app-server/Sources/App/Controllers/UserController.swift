@@ -19,7 +19,7 @@ class UserController: RouteCollection {
         api.post("register", use: register)
     }
     
-    func login(req: Request) async throws -> [String: String] {
+    func login(req: Request) async throws -> LoginResponse {
         
         // decode it
         let user = try req.content.decode(User.self)
@@ -39,10 +39,7 @@ class UserController: RouteCollection {
         
         // generate the token and put userId in the token
         let authPayload = AuthPayload(userId: existingUser.id!, expiration: .init(value: .distantFuture))
-        
-        return try [
-            "token": req.jwt.sign(authPayload)
-        ]
+        return try LoginResponse(error: false, token: req.jwt.sign(authPayload))
     }
     
     func register(req: Request) async throws -> HTTPStatus {

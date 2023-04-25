@@ -20,7 +20,7 @@ struct GroceryAppClientApp: App {
                     .navigationDestination(for: Route.self) { route in
                         switch route {
                             case .login:
-                                Text("Login")
+                                LoginScreen() 
                             case .groceryCategoryList:
                                 Text("Grocery Category List")
                         }

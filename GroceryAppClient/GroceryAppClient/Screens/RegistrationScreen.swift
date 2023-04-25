@@ -39,11 +39,19 @@ struct RegistrationScreen: View {
             SecureField("Password", text: $password)
             Text("Must be between 6 and 10 characters")
                 .font(.caption)
-            Button("Register") {
-                Task {
-                    await register()
-                }
-            }.disabled(!isFormValid)
+            
+            HStack {
+                Button("Register") {
+                    Task {
+                        await register()
+                    }
+                }.disabled(!isFormValid)
+                Spacer()
+                Button("Login") {
+                    appState.routes.append(.login)
+                }.buttonStyle(.borderless)
+                
+            }
             
             if let errorMessage {
                 Text(errorMessage)
@@ -54,12 +62,30 @@ struct RegistrationScreen: View {
     }
 }
 
+struct RegistrationScreenContainerView: View {
+    
+    @StateObject private var model = GroceryModel()
+    @StateObject private var appState = AppState()
+    
+    var body: some View {
+        NavigationStack(path: $appState.routes) {
+            RegistrationScreen()
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                        case .login:
+                            Text("Login")
+                        case .groceryCategoryList:
+                            Text("Grocery Category List")
+                    }
+                }
+        }
+        .environmentObject(model)
+        .environmentObject(appState)
+    }
+}
+
 struct RegistrationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            RegistrationScreen()
-                .environmentObject(GroceryModel())
-                .environmentObject(AppState())
-        }
+        RegistrationScreenContainerView()
     }
 }

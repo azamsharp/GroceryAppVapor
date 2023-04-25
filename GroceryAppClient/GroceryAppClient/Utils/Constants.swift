@@ -11,6 +11,7 @@ struct Constants {
     
     struct Urls {
         static let registerUrl = URL(string: "http://127.0.0.1:8080/api/register")!
+        static let loginUrl = URL(string: "http://127.0.0.1:8080/api/login")!
     }
     
     struct Messages {
