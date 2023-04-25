@@ -45,7 +45,7 @@ class UserController: RouteCollection {
         ]
     }
     
-    func register(req: Request) async throws -> RegistrationResponse {
+    func register(req: Request) async throws -> HTTPStatus {
         
         // validate the request
         try User.validate(content: req)
@@ -63,7 +63,7 @@ class UserController: RouteCollection {
         // hash the password
         user.password = try await req.password.async.hash(user.password)
         try await user.save(on: req.db)
-        return RegistrationResponse(error: false)
+        return .created
     }
     
 }

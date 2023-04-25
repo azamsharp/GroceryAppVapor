@@ -14,7 +14,7 @@ struct RegistrationScreen: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var errorMessage: String = ""
+    @State private var errorMessage: String?
     
     private var isFormValid: Bool {
         !username.isEmptyOrWhiteSpace && !password.isEmptyOrWhiteSpace && (password.count >= 6 && password.count <= 10)
@@ -22,10 +22,13 @@ struct RegistrationScreen: View {
     
     private func register() async {
         
-        let registered = await model.register(username: username, password: password)
-        if registered {
-            // go to the grocery category list screen
-            appState.routes.append(.login)
+        do {
+            let registered = try await model.register(username: username, password: password)
+            if registered {
+                appState.routes.append(.login)
+            }
+        } catch {
+            errorMessage = error.localizedDescription
         }
     }
     
@@ -42,8 +45,8 @@ struct RegistrationScreen: View {
                 }
             }.disabled(!isFormValid)
             
-            if let error = model.lastError {
-                Text(error.localizedDescription)
+            if let errorMessage {
+                Text(errorMessage)
             }
             
             

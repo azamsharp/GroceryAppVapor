@@ -12,22 +12,8 @@ class GroceryModel: ObservableObject {
     
     let httpClient = HTTPClient()
     
-    @Published var lastError: Error?
-    
-    func register(username: String, password: String) async -> Bool {
-        
-        do {
-            let registrationResponse = try await httpClient.register(username: username, password: password)
-            if registrationResponse.error {
-                lastError = NetworkError.serverError(registrationResponse.reason ?? "")
-                return false
-            }
-        } catch {
-            lastError = error
-            return false
-        }
-        
-        return true
+    func register(username: String, password: String) async throws -> Bool {        
+        try await httpClient.register(username: username, password: password)
     }
     
     func login(username: String, password: String) async throws -> LoginResponse {

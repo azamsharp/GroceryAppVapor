@@ -28,7 +28,7 @@ extension NetworkError: LocalizedError {
 
 struct HTTPClient {
     
-    func register(username: String, password: String) async throws -> RegistrationResponse {
+    func register(username: String, password: String) async throws -> Bool {
         
         let registerBody = ["username": username, "password": password]
         
@@ -37,14 +37,20 @@ struct HTTPClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(registerBody)
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         
-        guard let _ = response as? HTTPURLResponse else {
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.badRequest
         }
         
-        let registrationResponse = try JSONDecoder().decode(RegistrationResponse.self, from: data)
-        return registrationResponse
+        switch httpResponse.statusCode {
+            case 200...201:
+                return true
+            case 409:
+                throw NetworkError.serverError("Username is already taken.")
+            default:
+                throw NetworkError.badRequest
+        }
     }
     
     func login(username: String, password: String) async throws -> LoginResponse {
