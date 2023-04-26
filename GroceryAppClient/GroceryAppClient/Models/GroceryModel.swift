@@ -12,6 +12,8 @@ class GroceryModel: ObservableObject {
     
     let httpClient = HTTPClient()
     
+    @Published var groceryCategories: [GroceryCategory] = []
+    
     func register(username: String, password: String) async throws -> Bool {
         try await httpClient.register(username: username, password: password)
     }
@@ -29,8 +31,11 @@ class GroceryModel: ObservableObject {
         }
     }
     
-    func saveGroceryCategory(title: String, colorCode: String) async throws {
+    func saveGroceryCategory(groceryCategory: GroceryCategory) async throws {
         
+        let newGroceryCategory = try await httpClient.createGroceryCategory(groceryCategory: groceryCategory)
+        // add to the grocery categories
+        groceryCategories.append(newGroceryCategory)
     }
     
 }
