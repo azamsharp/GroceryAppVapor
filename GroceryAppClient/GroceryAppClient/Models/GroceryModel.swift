@@ -12,6 +12,7 @@ class GroceryModel: ObservableObject {
     
     let httpClient = HTTPClient()
     
+    @Published var lastError: Error? 
     @Published var groceryCategories: [GroceryCategory] = []
     
     func register(username: String, password: String) async throws -> Bool {

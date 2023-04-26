@@ -9,9 +9,9 @@ import Foundation
 
 struct GroceryCategory: Codable {
     
-    let id: UUID?
+    var id: UUID? = nil 
     let title: String
-    let colorCode: String
+    let color: String
     let userId: UUID
     
 }

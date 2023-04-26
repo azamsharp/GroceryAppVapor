@@ -26,7 +26,9 @@ struct GroceryListScreen: View {
                 }
             }
             .sheet(isPresented: $isPresented) {
-                AddGroceryCategoryScreen() 
+                NavigationStack {
+                    AddGroceryCategoryScreen()
+                }
             }
     }
 }
