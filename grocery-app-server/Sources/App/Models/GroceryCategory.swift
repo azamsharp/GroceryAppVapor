@@ -7,7 +7,37 @@
 
 import Foundation
 import Vapor
+import Fluent 
 
-struct GroceryCategory: Content {
-    let title: String
+final class GroceryCategory: Model, Content, Validatable {
+    
+    static let schema = "grocery_categories"
+    
+    @ID(key: .id)
+    var id: UUID?
+    
+    @Field(key: "title")
+    var title: String
+    
+    @Field(key: "color")
+    var color: String
+    
+    @Field(key: "userId")
+    var userId: UUID
+    
+    init() { }
+    
+    init(id: UUID? = nil, title: String, color: String, userId: UUID) {
+        self.title = title
+        self.color = color
+        self.userId = userId
+    }
+    
+    static func validations(_ validations: inout Validations) {
+        
+        // add validations 
+        validations.add("title", as: String.self, is: !.empty, customFailureDescription: "Title cannot be empty.")
+        
+        validations.add("color", as: String.self, is: !.empty, customFailureDescription: "Color cannot be empty.")
+    }
 }

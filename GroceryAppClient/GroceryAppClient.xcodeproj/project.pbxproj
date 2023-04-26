@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		348620EA29F8466100321D6A /* GroceryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620E929F8466100321D6A /* GroceryListScreen.swift */; };
+		348620EC29F9591400321D6A /* AddGroceryCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620EB29F9591400321D6A /* AddGroceryCategoryScreen.swift */; };
+		348620EF29F95BAF00321D6A /* GroceryCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620EE29F95BAF00321D6A /* GroceryCategory.swift */; };
 		8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */; };
 		8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AD829F56A8700232EBF /* ContentView.swift */; };
 		8DD94ADB29F56A8800232EBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD94ADA29F56A8800232EBF /* Assets.xcassets */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		348620E929F8466100321D6A /* GroceryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListScreen.swift; sourceTree = "<group>"; };
+		348620EB29F9591400321D6A /* AddGroceryCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroceryCategoryScreen.swift; sourceTree = "<group>"; };
+		348620EE29F95BAF00321D6A /* GroceryCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategory.swift; sourceTree = "<group>"; };
 		8DD94AD329F56A8700232EBF /* GroceryAppClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryAppClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryAppClientApp.swift; sourceTree = "<group>"; };
 		8DD94AD829F56A8700232EBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +70,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		348620ED29F9597300321D6A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8DD94ACA29F56A8600232EBF = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +97,7 @@
 		8DD94AD529F56A8700232EBF /* GroceryAppClient */ = {
 			isa = PBXGroup;
 			children = (
+				348620ED29F9597300321D6A /* Views */,
 				8DD94AF929F700E500232EBF /* Info.plist */,
 				8DD94AF229F5F14C00232EBF /* Utils */,
 				8DD94AEF29F5F03500232EBF /* Clients */,
@@ -115,6 +127,7 @@
 				8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */,
 				8DD94B1929F71A7B00232EBF /* LoginScreen.swift */,
 				348620E929F8466100321D6A /* GroceryListScreen.swift */,
+				348620EB29F9591400321D6A /* AddGroceryCategoryScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -133,6 +146,7 @@
 				8DD94AEB29F579A700232EBF /* GroceryModel.swift */,
 				8DD94AFA29F703C000232EBF /* AppState.swift */,
 				8DD94B1B29F71CE600232EBF /* LoginResponse.swift */,
+				348620EE29F95BAF00321D6A /* GroceryCategory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,12 +245,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348620EC29F9591400321D6A /* AddGroceryCategoryScreen.swift in Sources */,
 				8DD94AE929F574AE00232EBF /* String+Extensions.swift in Sources */,
 				348620EA29F8466100321D6A /* GroceryListScreen.swift in Sources */,
 				8DD94AFB29F703C000232EBF /* AppState.swift in Sources */,
 				8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */,
 				8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */,
 				8DD94AF129F5F05000232EBF /* HTTPClient.swift in Sources */,
+				348620EF29F95BAF00321D6A /* GroceryCategory.swift in Sources */,
 				8DD94AE629F5716900232EBF /* RegistrationScreen.swift in Sources */,
 				8DD94AF429F5F15700232EBF /* Constants.swift in Sources */,
 				8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */,

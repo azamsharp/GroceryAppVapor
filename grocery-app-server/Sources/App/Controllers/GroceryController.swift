@@ -18,7 +18,10 @@ class GroceryController: RouteCollection {
         api.post("grocery-categories", use: create)
     }
     
-    func create(req: Request) async throws -> String {
-        return "create"
+    func create(req: Request) async throws -> GroceryCategory {
+        
+        let groceryCategory = try req.content.decode(GroceryCategory.self)
+        try await groceryCategory.save(on: req.db)
+        return groceryCategory
     }
 }

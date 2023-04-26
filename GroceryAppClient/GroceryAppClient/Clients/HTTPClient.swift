@@ -32,7 +32,7 @@ struct HTTPClient {
         
         let registerBody = ["username": username, "password": password]
         
-        var request = URLRequest(url: Constants.Urls.registerUrl)
+        var request = URLRequest(url: Constants.Urls.register)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(registerBody)
@@ -57,7 +57,7 @@ struct HTTPClient {
         
         let loginBody = ["username": username, "password": password]
         
-        var request = URLRequest(url: Constants.Urls.loginUrl)
+        var request = URLRequest(url: Constants.Urls.login)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(loginBody)
@@ -70,6 +70,30 @@ struct HTTPClient {
         
         let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
         return loginResponse
+    }
+    
+    func createGroceryCategory(groceryCategory: GroceryCategory) async throws -> GroceryCategory {
+        
+        var request = URLRequest(url: Constants.Urls.saveGroceryCategory)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(groceryCategory)
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.badRequest
+        }
+        
+        switch httpResponse.statusCode {
+            case 200...201:
+                let savedGroceryCategory = try JSONDecoder().decode(GroceryCategory.self, from: data)
+                return savedGroceryCategory
+            case 409:
+                throw NetworkError.serverError(Constants.Messages.groceryCategoryCreationError)
+            default:
+                throw NetworkError.serverError(Constants.Messages.unknownError)
+        }
         
     }
     

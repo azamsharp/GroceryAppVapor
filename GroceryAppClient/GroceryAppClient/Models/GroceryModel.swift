@@ -29,4 +29,8 @@ class GroceryModel: ObservableObject {
         }
     }
     
+    func saveGroceryCategory(title: String, colorCode: String) async throws {
+        
+    }
+    
 }
