@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		348620EA29F8466100321D6A /* GroceryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620E929F8466100321D6A /* GroceryListScreen.swift */; };
 		8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */; };
 		8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AD829F56A8700232EBF /* ContentView.swift */; };
 		8DD94ADB29F56A8800232EBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD94ADA29F56A8800232EBF /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		348620E929F8466100321D6A /* GroceryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListScreen.swift; sourceTree = "<group>"; };
 		8DD94AD329F56A8700232EBF /* GroceryAppClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryAppClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryAppClientApp.swift; sourceTree = "<group>"; };
 		8DD94AD829F56A8700232EBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				8DD94AE529F5716900232EBF /* RegistrationScreen.swift */,
 				8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */,
 				8DD94B1929F71A7B00232EBF /* LoginScreen.swift */,
+				348620E929F8466100321D6A /* GroceryListScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD94AE929F574AE00232EBF /* String+Extensions.swift in Sources */,
+				348620EA29F8466100321D6A /* GroceryListScreen.swift in Sources */,
 				8DD94AFB29F703C000232EBF /* AppState.swift in Sources */,
 				8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */,
 				8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */,

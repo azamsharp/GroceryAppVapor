@@ -21,6 +21,8 @@ class GroceryModel: ObservableObject {
         let loginResponse = try await httpClient.login(username: username, password: password)
         if !loginResponse.error && loginResponse.token != nil {
             // save the token in the user defaults
+            let defaults = UserDefaults.standard
+            defaults.set(loginResponse.token!, forKey: "authToken")
             return true
         } else {
             throw NetworkError.serverError("Unable to login. Check username and password.")

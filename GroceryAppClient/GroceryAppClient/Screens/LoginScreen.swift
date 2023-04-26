@@ -31,6 +31,7 @@ struct LoginScreen: View {
     var body: some View {
         Form {
             TextField("Username", text: $username)
+                .textInputAutocapitalization(.never)
             SecureField("Password", text: $password)
             Button("Login") {
                 Task {

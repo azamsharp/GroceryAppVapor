@@ -22,7 +22,7 @@ struct GroceryAppClientApp: App {
                             case .login:
                                 LoginScreen() 
                             case .groceryCategoryList:
-                                Text("Grocery Category List")
+                                GroceryListScreen() 
                         }
                     }
             }
