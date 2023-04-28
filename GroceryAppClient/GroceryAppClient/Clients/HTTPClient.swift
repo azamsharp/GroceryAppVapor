@@ -10,6 +10,7 @@ import Foundation
 enum NetworkError: Error {
     case badRequest
     case serverError(String)
+    case decodingError
 }
 
 extension NetworkError: LocalizedError {
@@ -21,6 +22,8 @@ extension NetworkError: LocalizedError {
             case .serverError(let errorMessage):
                 print(errorMessage)
                 return NSLocalizedString(errorMessage, comment: "serverError")
+            case .decodingError:
+                return NSLocalizedString("Unable to decode successfully.", comment: "decodingError")
         }
     }
     
@@ -72,12 +75,35 @@ struct HTTPClient {
         return loginResponse
     }
     
-    func createGroceryCategory(groceryCategory: GroceryCategory) async throws -> GroceryCategory {
+    func getGroceryCategoriesBy(userId: UUID) async throws -> [GroceryCategory] {
         
-        var request = URLRequest(url: Constants.Urls.saveGroceryCategory)
+        let (data, response) = try await URLSession.shared.data(from: Constants.Urls.groceryCategoriesByUserId(userId: userId))
+        
+        print(Constants.Urls.groceryCategoriesByUserId(userId: UUID(uuidString: "47524ecc-4ff3-466d-9f6e-753d89a8433f")!))
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw NetworkError.badRequest
+        }
+        
+        guard let groceryCategories = try? JSONDecoder().decode([GroceryCategory].self, from: data) else {
+            throw NetworkError.decodingError
+        }
+        
+        return groceryCategories
+    }
+ 
+    func createGroceryCategory(groceryCategoryRequest: GroceryCategoryRequest) async throws -> GroceryCategory {
+        
+        let defaults = UserDefaults.standard
+        guard let userId = defaults.value(forKey: "userId") as? UUID else {
+            throw NetworkError.badRequest
+        }
+        
+        var request = URLRequest(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId))
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(groceryCategory)
+        request.httpBody = try JSONEncoder().encode(groceryCategoryRequest)
         
         let (data, response) = try await URLSession.shared.data(for: request)
         

@@ -11,4 +11,5 @@ struct LoginResponse: Decodable {
     let error: Bool
     let reason: String?
     let token: String?
+    let userId: UUID
 }

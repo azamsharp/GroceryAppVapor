@@ -12,7 +12,14 @@ struct Constants {
     struct Urls {
         static let register = URL(string: "http://127.0.0.1:8080/api/register")!
         static let login = URL(string: "http://127.0.0.1:8080/api/login")!
-        static let saveGroceryCategory = URL(string: "http://127.0.0.1:8080/api/grocery-categories")!
+        
+        static func saveGroceryCategoryByUserId(userId: UUID) -> URL {
+            return URL(string: "http://127.0.0.1:8080/api/users/\(userId)/grocery-categories")!
+        }
+        
+        static func groceryCategoriesByUserId(userId: UUID) -> URL {
+            return URL(string: "http://127.0.0.1:8080/api/users/\(userId)/grocery-categories")!
+        }
     }
     
     struct Messages {

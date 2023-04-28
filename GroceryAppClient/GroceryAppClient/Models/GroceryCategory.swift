@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GroceryCategory: Codable {
+struct GroceryCategory: Codable, Identifiable {
     
     var id: UUID? = nil 
     let title: String

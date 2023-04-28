@@ -12,24 +12,30 @@ struct AddGroceryCategoryScreen: View {
     @EnvironmentObject private var model: GroceryModel
     @Environment(\.dismiss) private var dismiss
     @State private var title: String = ""
+    @State private var colorCode: String = ""
+    
     
     private func saveGroceryCategory() async {
         
-        let groceryCategory = GroceryCategory(title: title, color: "#000080", userId: UUID(uuidString: "47524ecc-4ff3-466d-9f6e-753d89a8433f")!)
+        let groceryCategoryRequest = GroceryCategoryRequest(title: title, color: colorCode)
+        
         do {
-            try await model.saveGroceryCategory(groceryCategory: groceryCategory)
+            try await model.saveGroceryCategory(groceryCategoryRequest: groceryCategoryRequest)
+            dismiss()
         } catch {
             model.lastError = error
         }
     }
     
-    // make sure it is valid
-    // private var isFormValid
+    private var isFormValid: Bool {
+        !title.isEmptyOrWhiteSpace
+    }
     
     var body: some View {
         Form {
            
             TextField("Title", text: $title)
+            ColorSelectionView(colorCode: $colorCode)
             
             if let error = model.lastError {
                 Text(error.localizedDescription)
@@ -50,7 +56,7 @@ struct AddGroceryCategoryScreen: View {
                         Task {
                             await saveGroceryCategory()
                         }
-                    }
+                    }.disabled(!isFormValid)
                 }
             }
     }
