@@ -17,7 +17,10 @@ class GroceryModel: ObservableObject {
     
     func register(username: String, password: String) async -> Bool {
         do {
-            return try await httpClient.register(username: username, password: password)
+            
+            let postData = ["username": username, "password": password]
+            let registerResource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
+            return try await httpClient.load(registerResource)
         } catch {
             lastError = error
         }
@@ -34,10 +37,12 @@ class GroceryModel: ObservableObject {
             return
         }
         
+        let resource = Resource(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId), modelType: [GroceryCategory].self)
+        
         do {
-            groceryCategories = try await httpClient.getGroceryCategoriesBy(userId: userId)
+            groceryCategories = try await httpClient.load(resource)
         } catch {
-            lastError = error 
+           lastError = error
         }
     }
     
