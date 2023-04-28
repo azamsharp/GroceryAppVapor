@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import Vapor
+
+struct GroceryCategoryRequest: Content {
+    let title: String
+    let color: String
+}

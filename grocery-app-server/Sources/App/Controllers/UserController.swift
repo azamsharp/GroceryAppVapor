@@ -39,7 +39,7 @@ class UserController: RouteCollection {
         
         // generate the token and put userId in the token
         let authPayload = AuthPayload(userId: existingUser.id!, expiration: .init(value: .distantFuture))
-        return try LoginResponse(error: false, token: req.jwt.sign(authPayload))
+        return try LoginResponse(error: false, token: req.jwt.sign(authPayload), userId: existingUser.id!)
     }
     
     func register(req: Request) async throws -> HTTPStatus {

@@ -79,8 +79,6 @@ struct HTTPClient {
         
         let (data, response) = try await URLSession.shared.data(from: Constants.Urls.groceryCategoriesByUserId(userId: userId))
         
-        print(Constants.Urls.groceryCategoriesByUserId(userId: UUID(uuidString: "47524ecc-4ff3-466d-9f6e-753d89a8433f")!))
-        
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
             throw NetworkError.badRequest
@@ -96,7 +94,9 @@ struct HTTPClient {
     func createGroceryCategory(groceryCategoryRequest: GroceryCategoryRequest) async throws -> GroceryCategory {
         
         let defaults = UserDefaults.standard
-        guard let userId = defaults.value(forKey: "userId") as? UUID else {
+        guard let userIdString = defaults.value(forKey: "userId") as? String,
+              let userId = UUID(uuidString: userIdString)
+        else {
             throw NetworkError.badRequest
         }
         
