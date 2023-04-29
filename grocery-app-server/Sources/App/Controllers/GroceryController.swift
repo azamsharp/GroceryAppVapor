@@ -15,18 +15,45 @@ class GroceryController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        let api = routes.grouped("api", "users")
+        // api/users/:userId
+        let api = routes.grouped("api", "users", ":userId")
         
-        // POST /api/users/:id/grocery-categories
-        api.post(":id", "grocery-categories", use: create)
-        // GET /api/users/:id/grocery-categories
-        api.get(":id", "grocery-categories", use: getByUser)
+        // POST /api/users/:userId/grocery-categories
+        api.post("grocery-categories", use: create)
+        // GET /api/users/:userId/grocery-categories
+        api.get("grocery-categories", use: getByUser)
+        // DELETE /api/users/:userId/grocery-categories/:groceryCategoryId
+        api.delete("grocery-categories", ":groceryCategoryId", use: deleteGroceryCategory)
+    }
+    
+    func deleteGroceryCategory(req: Request) async throws -> GroceryCategory {
+        
+        // get the id from the route parameters
+        guard let userId = req.parameters.get("userId", as: UUID.self),
+              let groceryCategoryId = req.parameters.get("groceryCategoryId", as: UUID.self)
+        else {
+            throw Abort(.badRequest)
+        }
+        
+        guard let groceryCategory = try await GroceryCategory.find(groceryCategoryId, on: req.db) else {
+            throw Abort(.badRequest)
+        }
+        
+        // check the userId
+        if userId == groceryCategory.userId {
+            // delete the grocery category
+            try await groceryCategory.delete(on: req.db)
+        } else {
+            throw Abort(.forbidden)
+        }
+        
+        return groceryCategory
     }
     
     func getByUser(req: Request) async throws -> [GroceryCategory] {
         
         // get the id from the route parameters
-        guard let userId = req.parameters.get("id", as: UUID.self) else {
+        guard let userId = req.parameters.get("userId", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
@@ -38,7 +65,7 @@ class GroceryController: RouteCollection {
     func create(req: Request) async throws -> GroceryCategory {
         
         // get the id from the route parameters
-        guard let userId = req.parameters.get("id", as: UUID.self) else {
+        guard let userId = req.parameters.get("userId", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
