@@ -35,6 +35,7 @@ extension NetworkError: LocalizedError {
 enum HttpMethod {
     case get([URLQueryItem])
     case post(Data?)
+    case delete
     
     var name: String {
         switch self {
@@ -42,6 +43,8 @@ enum HttpMethod {
                 return "GET"
             case .post:
                 return "POST"
+            case .delete:
+                return "DELETE"
         }
     }
 }
@@ -82,6 +85,8 @@ struct HTTPClient {
                         throw NetworkError.badRequest
                     }
                     request = URLRequest(url: url)
+                case .delete:
+                    request.httpMethod = resource.method.name 
             }
             
             // create the URLSession configuration
@@ -150,7 +155,7 @@ struct HTTPClient {
     
     func getGroceryCategoriesBy(userId: UUID) async throws -> [GroceryCategory] {
         
-        let (data, response) = try await URLSession.shared.data(from: Constants.Urls.groceryCategoriesByUserId(userId: userId))
+        let (data, response) = try await URLSession.shared.data(from: Constants.Urls.groceryCategoriesBy(userId: userId))
         
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {

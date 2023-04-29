@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		348620EA29F8466100321D6A /* GroceryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620E929F8466100321D6A /* GroceryListScreen.swift */; };
+		348620EA29F8466100321D6A /* GroceryCategoryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620E929F8466100321D6A /* GroceryCategoryListScreen.swift */; };
 		348620EC29F9591400321D6A /* AddGroceryCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620EB29F9591400321D6A /* AddGroceryCategoryScreen.swift */; };
 		348620EF29F95BAF00321D6A /* GroceryCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348620EE29F95BAF00321D6A /* GroceryCategory.swift */; };
 		8D8B7FDD29FC3C3B00A4BC78 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8B7FDC29FC3C3B00A4BC78 /* Color+Extensions.swift */; };
@@ -22,7 +22,6 @@
 		8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AEB29F579A700232EBF /* GroceryModel.swift */; };
 		8DD94AF129F5F05000232EBF /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF029F5F05000232EBF /* HTTPClient.swift */; };
 		8DD94AF429F5F15700232EBF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF329F5F15700232EBF /* Constants.swift */; };
-		8DD94AF829F6FD2A00232EBF /* GroceryCategoryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */; };
 		8DD94AFB29F703C000232EBF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AFA29F703C000232EBF /* AppState.swift */; };
 		8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1929F71A7B00232EBF /* LoginScreen.swift */; };
 		8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1B29F71CE600232EBF /* LoginResponse.swift */; };
@@ -42,7 +41,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		348620E929F8466100321D6A /* GroceryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListScreen.swift; sourceTree = "<group>"; };
+		348620E929F8466100321D6A /* GroceryCategoryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategoryListScreen.swift; sourceTree = "<group>"; };
 		348620EB29F9591400321D6A /* AddGroceryCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroceryCategoryScreen.swift; sourceTree = "<group>"; };
 		348620EE29F95BAF00321D6A /* GroceryCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategory.swift; sourceTree = "<group>"; };
 		8D8B7FDC29FC3C3B00A4BC78 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -58,7 +57,6 @@
 		8DD94AEB29F579A700232EBF /* GroceryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryModel.swift; sourceTree = "<group>"; };
 		8DD94AF029F5F05000232EBF /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8DD94AF329F5F15700232EBF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategoryListScreen.swift; sourceTree = "<group>"; };
 		8DD94AF929F700E500232EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8DD94AFA29F703C000232EBF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8DD94B1929F71A7B00232EBF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -131,9 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				8DD94AE529F5716900232EBF /* RegistrationScreen.swift */,
-				8DD94AF729F6FD2A00232EBF /* GroceryCategoryListScreen.swift */,
 				8DD94B1929F71A7B00232EBF /* LoginScreen.swift */,
-				348620E929F8466100321D6A /* GroceryListScreen.swift */,
+				348620E929F8466100321D6A /* GroceryCategoryListScreen.swift */,
 				348620EB29F9591400321D6A /* AddGroceryCategoryScreen.swift */,
 			);
 			path = Screens;
@@ -256,7 +253,7 @@
 			files = (
 				348620EC29F9591400321D6A /* AddGroceryCategoryScreen.swift in Sources */,
 				8DD94AE929F574AE00232EBF /* String+Extensions.swift in Sources */,
-				348620EA29F8466100321D6A /* GroceryListScreen.swift in Sources */,
+				348620EA29F8466100321D6A /* GroceryCategoryListScreen.swift in Sources */,
 				8DD94AFB29F703C000232EBF /* AppState.swift in Sources */,
 				8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */,
 				8D8B7FDD29FC3C3B00A4BC78 /* Color+Extensions.swift in Sources */,
@@ -270,7 +267,6 @@
 				8D8B7FE129FC422D00A4BC78 /* ColorSelector.swift in Sources */,
 				8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */,
 				8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */,
-				8DD94AF829F6FD2A00232EBF /* GroceryCategoryListScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

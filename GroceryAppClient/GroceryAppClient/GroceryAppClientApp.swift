@@ -16,13 +16,13 @@ struct GroceryAppClientApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $appState.routes) {
-                GroceryListScreen()
+                LoginScreen()
                     .navigationDestination(for: Route.self) { route in
                         switch route {
                             case .login:
                                 LoginScreen() 
                             case .groceryCategoryList:
-                                GroceryListScreen()
+                                GroceryCategoryListScreen()
                         }
                     }
             }

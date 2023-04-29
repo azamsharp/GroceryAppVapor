@@ -46,6 +46,22 @@ class GroceryModel: ObservableObject {
         }
     }
     
+    func deleteGroceryCategory(groceryCategoryId: UUID) async throws {
+        
+        let defaults = UserDefaults.standard
+        guard let userIdString = defaults.value(forKey: "userId") as? String,
+              let userId = UUID(uuidString: userIdString)
+        else {
+            return
+        }
+        
+        let resource = Resource(url: Constants.Urls.deleteGroceryCategory(userId: userId, groceryCategoryId: groceryCategoryId), method: .delete, modelType: GroceryCategory.self)
+        
+        let groceryCategory = try await httpClient.load(resource)
+        // remove the grocery category from the list
+        groceryCategories = groceryCategories.filter { $0.id != groceryCategory.id }
+    }
+    
     func login(username: String, password: String) async throws -> Bool {
         
         // login POST data
@@ -81,8 +97,6 @@ class GroceryModel: ObservableObject {
         
         let newGroceryCategory = try await httpClient.load(resource)
         
-        //let newGroceryCategory = try await httpClient.createGroceryCategory(groceryCategoryRequest: groceryCategoryRequest)
-        // add to the grocery categories
         groceryCategories.append(newGroceryCategory)
     }
     

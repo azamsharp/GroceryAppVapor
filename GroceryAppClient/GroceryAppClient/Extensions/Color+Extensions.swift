@@ -21,8 +21,4 @@ extension Color {
         
         return Color(.sRGB, red: red, green: green, blue: blue, opacity: 1)
     }
-    
-    
-    
-    
 }
