@@ -79,7 +79,7 @@ struct HTTPClient {
             
             let (data, response) = try await session.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200
+                  (200...201).contains(httpResponse.statusCode)
             else {
                 throw NetworkError.invalidResponse
             }

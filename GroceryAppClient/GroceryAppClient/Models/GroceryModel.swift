@@ -19,8 +19,8 @@ class GroceryModel: ObservableObject {
         do {
             
             let postData = ["username": username, "password": password]
-            let registerResource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
-            return try await httpClient.load(registerResource)
+            let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
+            return try await httpClient.load(resource)
         } catch {
             lastError = error
         }
@@ -48,7 +48,15 @@ class GroceryModel: ObservableObject {
     
     func login(username: String, password: String) async throws -> Bool {
         
-        let loginResponse = try await httpClient.login(username: username, password: password)
+        // login POST data
+        let loginPostData = ["username": username, "password": password]
+        
+        // create the resource
+        let resource = try Resource(url: Constants.Urls.login, method: .post(JSONEncoder().encode(loginPostData)), modelType: LoginResponse.self)
+        
+        // get login response
+        let loginResponse = try await httpClient.load(resource)
+        
         if !loginResponse.error && loginResponse.token != nil {
             // save the token in the user defaults
             let defaults = UserDefaults.standard
@@ -62,7 +70,18 @@ class GroceryModel: ObservableObject {
     
     func saveGroceryCategory(groceryCategoryRequest: GroceryCategoryRequest) async throws {
         
-        let newGroceryCategory = try await httpClient.createGroceryCategory(groceryCategoryRequest: groceryCategoryRequest)
+        let defaults = UserDefaults.standard
+        guard let userIdString = defaults.value(forKey: "userId") as? String,
+              let userId = UUID(uuidString: userIdString)
+        else {
+            throw NetworkError.badRequest
+        }
+        
+        let resource = try Resource(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId), method: .post(JSONEncoder().encode(groceryCategoryRequest)), modelType: GroceryCategory.self)
+        
+        let newGroceryCategory = try await httpClient.load(resource)
+        
+        //let newGroceryCategory = try await httpClient.createGroceryCategory(groceryCategoryRequest: groceryCategoryRequest)
         // add to the grocery categories
         groceryCategories.append(newGroceryCategory)
     }
