@@ -9,11 +9,15 @@ public func configure(_ app: Application) throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     
     // configure database
-    try app.databases.use(.postgres(url: "postgres://hdrqiidw:JrwDDiet31AjKpDOvtFTjKi4ynX_2MBI@lallah.db.elephantsql.com/hdrqiidw"), as: .psql)
+    app.databases.use(.postgres(hostname: "localhost", username: "postgres", password: "", database: "grocerydb"), as: .psql)
+    
+    print("CONFIGURE")
+    //try app.databases.use(.postgres(url: "postgres://hdrqiidw:JrwDDiet31AjKpDOvtFTjKi4ynX_2MBI@localhost/grocery-"), as: .psql)
     
     // register migrations
     app.migrations.add(CreateUsersTableMigration())
     app.migrations.add(CreateGroceryCategoriesTableMigration())
+    app.migrations.add(CreateGroceryItemTableMigration())
     
     // register the controllers
     try app.register(collection: UserController())

@@ -37,7 +37,6 @@ final class GroceryCategory: Model, Content, Validatable {
         
         // add validations
         validations.add("title", as: String.self, is: !.empty, customFailureDescription: "Title cannot be empty.")
-        
         validations.add("color", as: String.self, is: !.empty, customFailureDescription: "Color cannot be empty.")
     }
 }

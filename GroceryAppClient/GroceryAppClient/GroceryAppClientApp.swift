@@ -15,7 +15,6 @@ struct GroceryAppClientApp: App {
     
     var body: some Scene {
         
-        let _ = print("GroceryAppClientApp")
         // get the token from the user defaults
         let defaults = UserDefaults.standard
         let token = defaults.string(forKey: Constants.Strings.authToken)
@@ -25,7 +24,7 @@ struct GroceryAppClientApp: App {
                 
                 Group {
                     if token == nil {
-                        LoginScreen()
+                        RegistrationScreen()
                     } else {
                         GroceryCategoryListScreen()
                     }
@@ -36,7 +35,7 @@ struct GroceryAppClientApp: App {
                         case .groceryCategoryList:
                             GroceryCategoryListScreen()
                         case .groceryCategoryDetail(let groceryCategory):
-                            GroceryCategoryDetail(groceryCategory: groceryCategory)
+                            GroceryDetailScreen(groceryCategory: groceryCategory)
                     }
                 }
                    
