@@ -11,4 +11,5 @@ import Vapor
 struct GroceryCategoryRequest: Content {
     let title: String
     let color: String
+    let userId: UUID 
 }

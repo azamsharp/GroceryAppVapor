@@ -12,7 +12,7 @@ import Fluent
 final class GroceryCategory: Model, Content, Validatable {
     
     static let schema = "grocery_categories"
-    
+
     @ID(key: .id)
     var id: UUID?
     
@@ -22,15 +22,15 @@ final class GroceryCategory: Model, Content, Validatable {
     @Field(key: "color")
     var color: String
     
-    @Field(key: "userId")
-    var userId: UUID
+    @Parent(key: "user_id")
+    var user: User
     
     init() { }
     
     init(id: UUID? = nil, title: String, color: String, userId: UUID) {
         self.title = title
         self.color = color
-        self.userId = userId
+        self.$user.id = userId
     }
     
     static func validations(_ validations: inout Validations) {
