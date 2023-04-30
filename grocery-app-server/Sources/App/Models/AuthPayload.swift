@@ -28,6 +28,8 @@ struct AuthPayload: JWTPayload {
     //var isAdmin: Bool
     
     func verify(using signer: JWTSigner) throws {
+        print(self.expiration.value) 
+        
         try self.expiration.verifyNotExpired()
     }
     

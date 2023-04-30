@@ -14,17 +14,29 @@ struct GroceryAppClientApp: App {
     @StateObject private var appState = AppState()
     
     var body: some Scene {
+        
+        // get the token from the user defaults
+        let defaults = UserDefaults.standard
+        let token = defaults.string(forKey: "authToken")
+        
         WindowGroup {
             NavigationStack(path: $appState.routes) {
-                LoginScreen()
-                    .navigationDestination(for: Route.self) { route in
-                        switch route {
-                            case .login:
-                                LoginScreen() 
-                            case .groceryCategoryList:
-                                GroceryCategoryListScreen()
-                        }
+                
+                Group {
+                    if token == nil {
+                        LoginScreen()
+                    } else {
+                        GroceryCategoryListScreen()
                     }
+                } .navigationDestination(for: Route.self) { route in
+                    switch route {
+                        case .login:
+                            LoginScreen()
+                        case .groceryCategoryList:
+                            GroceryCategoryListScreen()
+                    }
+                }
+                   
             }
             .environmentObject(model)
             .environmentObject(appState)
