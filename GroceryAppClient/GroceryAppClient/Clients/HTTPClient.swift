@@ -62,7 +62,7 @@ struct HTTPClient {
         var headers = ["Content-Type": "application/json"]
         
         let defaults = UserDefaults.standard
-        guard let token = defaults.string(forKey: "authToken") else {
+        guard let token = defaults.string(forKey: Constants.Strings.authToken) else {
             return headers
         }
         
@@ -109,6 +109,7 @@ struct HTTPClient {
             return result
         }
     
+    /*
     func register(username: String, password: String) async throws -> Bool {
         
         let registerBody = ["username": username, "password": password]
@@ -200,5 +201,6 @@ struct HTTPClient {
         }
         
     }
+     */
     
 }

@@ -17,7 +17,7 @@ struct GroceryAppClientApp: App {
         
         // get the token from the user defaults
         let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "authToken")
+        let token = defaults.string(forKey: Constants.Strings.authToken)
         
         WindowGroup {
             NavigationStack(path: $appState.routes) {

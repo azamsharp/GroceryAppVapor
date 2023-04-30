@@ -10,22 +10,22 @@ import Foundation
 @MainActor
 class GroceryModel: ObservableObject {
     
-    let httpClient = HTTPClient()
+    //let httpClient = HTTPClient()
+    let httpClient: HTTPClient
+    
+    init() {
+        print("GroceryModel Initialized")
+        httpClient = HTTPClient()
+    }
     
     @Published var lastError: Error? 
     @Published var groceryCategories: [GroceryCategory] = []
     
-    func register(username: String, password: String) async -> Bool {
-        do {
-            
-            let postData = ["username": username, "password": password]
-            let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
-            return try await httpClient.load(resource)
-        } catch {
-            lastError = error
-        }
+    func register(username: String, password: String) async throws -> Bool {
         
-        return false
+        let postData = ["username": username, "password": password]
+        let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
+        return try await httpClient.load(resource)
     }
     
     func populateGroceryCategories() async {
@@ -76,7 +76,7 @@ class GroceryModel: ObservableObject {
         if !loginResponse.error && loginResponse.token != nil {
             // save the token in the user defaults
             let defaults = UserDefaults.standard
-            defaults.set(loginResponse.token!, forKey: "authToken")
+            defaults.set(loginResponse.token!, forKey: Constants.Strings.authToken)
             defaults.set(loginResponse.userId.uuidString, forKey: "userId")
             return true
         } else {
