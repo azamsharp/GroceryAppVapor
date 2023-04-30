@@ -11,7 +11,6 @@ public func configure(_ app: Application) throws {
     // configure database
     app.databases.use(.postgres(hostname: "localhost", username: "postgres", password: "", database: "grocerydb"), as: .psql)
     
-    print("CONFIGURE")
     //try app.databases.use(.postgres(url: "postgres://hdrqiidw:JrwDDiet31AjKpDOvtFTjKi4ynX_2MBI@localhost/grocery-"), as: .psql)
     
     // register migrations

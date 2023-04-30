@@ -12,7 +12,7 @@ struct AddGroceryCategoryScreen: View {
     @EnvironmentObject private var model: GroceryModel
     @Environment(\.dismiss) private var dismiss
     @State private var title: String = ""
-    @State private var colorCode: String = ""
+    @State private var colorCode: String = "#2ecc71"
     
     
     private func saveGroceryCategory() async {
