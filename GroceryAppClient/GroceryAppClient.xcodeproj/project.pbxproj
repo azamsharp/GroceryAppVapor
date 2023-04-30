@@ -26,6 +26,7 @@
 		8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1929F71A7B00232EBF /* LoginScreen.swift */; };
 		8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1B29F71CE600232EBF /* LoginResponse.swift */; };
 		8DE9A4D629FE1CC200930ACB /* GroceryCategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D529FE1CC200930ACB /* GroceryCategoryDetail.swift */; };
+		8DE9A4D829FE215500930ACB /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D729FE215500930ACB /* UserDefaults+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,7 @@
 		8DD94B1929F71A7B00232EBF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		8DD94B1B29F71CE600232EBF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		8DE9A4D529FE1CC200930ACB /* GroceryCategoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategoryDetail.swift; sourceTree = "<group>"; };
+		8DE9A4D729FE215500930ACB /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			children = (
 				8DD94AE829F574AE00232EBF /* String+Extensions.swift */,
 				8D8B7FDC29FC3C3B00A4BC78 /* Color+Extensions.swift */,
+				8DE9A4D729FE215500930ACB /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				8DD94AEC29F579A700232EBF /* GroceryModel.swift in Sources */,
 				8DD94AF129F5F05000232EBF /* HTTPClient.swift in Sources */,
 				348620EF29F95BAF00321D6A /* GroceryCategory.swift in Sources */,
+				8DE9A4D829FE215500930ACB /* UserDefaults+Extensions.swift in Sources */,
 				8D8B7FDF29FC3F8200A4BC78 /* GroceryCategoryRequest.swift in Sources */,
 				8DD94AE629F5716900232EBF /* RegistrationScreen.swift in Sources */,
 				8DD94AF429F5F15700232EBF /* Constants.swift in Sources */,

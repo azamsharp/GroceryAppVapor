@@ -24,10 +24,7 @@ class GroceryModel: ObservableObject {
     
     func populateGroceryCategories() async {
                 
-        let defaults = UserDefaults.standard
-        guard let userIdString = defaults.value(forKey: "userId") as? String,
-              let userId = UUID(uuidString: userIdString)
-        else {
+        guard let userId = UserDefaults.standard.userId else {
             return
         }
         
@@ -42,10 +39,7 @@ class GroceryModel: ObservableObject {
     
     func deleteGroceryCategory(groceryCategoryId: UUID) async throws {
         
-        let defaults = UserDefaults.standard
-        guard let userIdString = defaults.value(forKey: "userId") as? String,
-              let userId = UUID(uuidString: userIdString)
-        else {
+        guard let userId = UserDefaults.standard.userId else {
             return
         }
         
@@ -80,13 +74,10 @@ class GroceryModel: ObservableObject {
     
     func saveGroceryCategory(groceryCategoryRequest: GroceryCategoryRequest) async throws {
         
-        let defaults = UserDefaults.standard
-        guard let userIdString = defaults.value(forKey: "userId") as? String,
-              let userId = UUID(uuidString: userIdString)
-        else {
+        guard let userId = UserDefaults.standard.userId else {
             throw NetworkError.badRequest
         }
-        
+       
         let resource = try Resource(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId), method: .post(JSONEncoder().encode(groceryCategoryRequest)), modelType: GroceryCategory.self)
         
         let newGroceryCategory = try await httpClient.load(resource)
