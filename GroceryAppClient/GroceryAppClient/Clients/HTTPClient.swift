@@ -29,7 +29,6 @@ extension NetworkError: LocalizedError {
                 return NSLocalizedString("Invalid response", comment: "invalidResponse")
         }
     }
-    
 }
 
 enum HttpMethod {

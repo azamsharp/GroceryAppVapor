@@ -10,14 +10,8 @@ import Foundation
 @MainActor
 class GroceryModel: ObservableObject {
     
-    //let httpClient = HTTPClient()
-    let httpClient: HTTPClient
-    
-    init() {
-        print("GroceryModel Initialized")
-        httpClient = HTTPClient()
-    }
-    
+    let httpClient = HTTPClient()
+   
     @Published var lastError: Error? 
     @Published var groceryCategories: [GroceryCategory] = []
     
@@ -37,7 +31,7 @@ class GroceryModel: ObservableObject {
             return
         }
         
-        let resource = Resource(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId), modelType: [GroceryCategory].self)
+        let resource = Resource(url: Constants.Urls.groceryCategoriesBy(userId: userId), modelType: [GroceryCategory].self)
         
         do {
             groceryCategories = try await httpClient.load(resource)

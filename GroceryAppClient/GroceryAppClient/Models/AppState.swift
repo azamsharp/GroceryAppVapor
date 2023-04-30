@@ -10,6 +10,7 @@ import Foundation
 enum Route: Hashable {
     case login
     case groceryCategoryList
+    case groceryCategoryDetail(GroceryCategory)
 }
 
 class AppState: ObservableObject {

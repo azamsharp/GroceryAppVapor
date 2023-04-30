@@ -9,8 +9,6 @@ public func configure(_ app: Application) throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     
     // configure database
-    //app.databases.use(.postgres(hostname: "lallah.db.elephantsql.com", username: "hdrqiidw", password: "JrwDDiet31AjKpDOvtFTjKi4ynX_2MBI", database: "hdrqiidw"), as: .psql)
-    
     try app.databases.use(.postgres(url: "postgres://hdrqiidw:JrwDDiet31AjKpDOvtFTjKi4ynX_2MBI@lallah.db.elephantsql.com/hdrqiidw"), as: .psql)
     
     // register migrations
