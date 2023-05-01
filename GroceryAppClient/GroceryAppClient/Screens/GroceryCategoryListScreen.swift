@@ -41,6 +41,8 @@ struct GroceryCategoryListScreen: View {
                                         .fill(Color.fromHex(groceryCategory.color))
                                         .frame(width: 25, height: 25)
                                     Text(groceryCategory.title)
+                                    Spacer()
+                                    Text("33")
                                 }
                             }
                         }

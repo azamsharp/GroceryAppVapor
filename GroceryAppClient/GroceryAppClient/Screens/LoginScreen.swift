@@ -61,6 +61,7 @@ struct LoginScreen: View {
             }
             
         }.navigationTitle("Login")
+            .navigationBarBackButtonHidden(true) 
     }
 }
 

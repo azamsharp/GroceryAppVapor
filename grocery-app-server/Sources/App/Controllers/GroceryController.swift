@@ -127,7 +127,8 @@ class GroceryController: RouteCollection {
         }
         
         return try await GroceryCategory.query(on: req.db)
-            // get all grocery categories where userId is matching userId
+            // get all grocery items for the matching grocery category 
+            .with(\.$items)
             .filter(\.$user.$id == userId)
             .all()
             .compactMap(GroceryCategoryResponse.init)

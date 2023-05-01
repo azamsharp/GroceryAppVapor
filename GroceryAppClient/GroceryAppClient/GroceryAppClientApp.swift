@@ -23,7 +23,7 @@ struct GroceryAppClientApp: App {
             NavigationStack(path: $appState.routes) {
                 
                 Group {
-                    LoginScreen()
+                    GroceryCategoryListScreen()
                     /*
                     if token == nil {
                         RegistrationScreen()

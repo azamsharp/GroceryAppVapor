@@ -13,6 +13,7 @@ struct GroceryCategoryResponse: Content {
     let title: String
     let color: String
     let userId: UUID
+    let noOfItems: Int
 }
 
 extension GroceryCategoryResponse {
@@ -27,7 +28,8 @@ extension GroceryCategoryResponse {
         self.id = id
         self.title = groceryCategory.title
         self.color = groceryCategory.color
-        self.userId = groceryCategory.$user.id 
+        self.userId = groceryCategory.$user.id
+        self.noOfItems = groceryCategory.items.count
     }
 }
 
