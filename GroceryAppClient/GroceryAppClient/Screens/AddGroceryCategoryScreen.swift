@@ -14,13 +14,17 @@ struct AddGroceryCategoryScreen: View {
     @State private var title: String = ""
     @State private var colorCode: String = "#2ecc71"
     
-    
     private func saveGroceryCategory() async {
         
-        let groceryCategoryRequest = GroceryCategoryRequest(title: title, color: colorCode)
+        // get userId
+        guard let userId = UserDefaults.standard.userId else {
+            return
+        }
         
+        let groceryCategory = GroceryCategory(title: title, color: colorCode, userId: userId)
+       
         do {
-            try await model.saveGroceryCategory(groceryCategoryRequest: groceryCategoryRequest)
+            try await model.saveGroceryCategory(groceryCategory: groceryCategory)
             dismiss()
         } catch {
             model.lastError = error

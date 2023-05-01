@@ -8,10 +8,8 @@
 import Foundation
 
 struct GroceryCategory: Codable, Identifiable, Hashable {
-    
-    let id: UUID
+    var id: UUID?
     let title: String
     let color: String
-    let userId: UUID
-    
+    let userId: UUID 
 }
