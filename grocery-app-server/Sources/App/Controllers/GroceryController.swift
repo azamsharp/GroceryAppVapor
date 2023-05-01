@@ -23,7 +23,7 @@ class GroceryController: RouteCollection {
         // GET: /api/users/:userId/grocery-categories
         api.get(":userId", "grocery-categories", use: getGroceryCategoriesByUser)
         // DELETE: /api/users/:userId/grocery-categories/:groceryCategoryId
-        api.delete(":userId", "grocery-categories", use: deleteGroceryCategory)
+        api.delete(":userId", "grocery-categories", ":groceryCategoryId", use: deleteGroceryCategory)
         /*
         // api/users/:userId
         let api = routes.grouped("api", "users", ":userId")
@@ -59,7 +59,7 @@ class GroceryController: RouteCollection {
         //return groceryCategory
     }
     
-    func deleteGroceryCategory(req: Request) async throws -> GroceryCategory {
+    func deleteGroceryCategory(req: Request) async throws -> GroceryCategoryResponse {
         
         // get the id from the route parameters
         guard let userId = req.parameters.get("userId", as: UUID.self),
@@ -76,7 +76,12 @@ class GroceryController: RouteCollection {
         }
         
         try await groceryCategory.delete(on: req.db)
-        return groceryCategory
+        
+        guard let groceryCategoryResponse = GroceryCategoryResponse(groceryCategory: groceryCategory) else {
+            throw Abort(.internalServerError)
+        }
+        
+        return groceryCategoryResponse
     }
     
     // get grocery categories by user
