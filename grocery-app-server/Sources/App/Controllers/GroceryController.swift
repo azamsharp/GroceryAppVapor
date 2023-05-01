@@ -15,7 +15,7 @@ class GroceryController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        // /api/users
+        // /api/users/:userId
         let api = routes.grouped("api", "users", ":userId")
         
         // POST: /api/users/:userId/grocery-categories
@@ -30,7 +30,7 @@ class GroceryController: RouteCollection {
         api.post("grocery-categories", ":groceryCategoryId", "grocery-items", use: saveGroceryItem)
     }
     
-    func saveGroceryItem(req: Request) async throws -> GroceryItem {
+    func saveGroceryItem(req: Request) async throws -> GroceryItemResponse {
         
         guard let userId = req.parameters.get("userId", as: UUID.self),
               let groceryCategoryId = req.parameters.get("groceryCategoryId", as: UUID.self) else {
@@ -51,12 +51,16 @@ class GroceryController: RouteCollection {
         }
         
         let groceryItemRequest = try req.content.decode(GroceryItemRequest.self)
+        
         let groceryItem = GroceryItem(title: groceryItemRequest.title, price: groceryItemRequest.price, quantity: groceryItemRequest.quantity, groceryCategoryId: groceryCategory.id!)
         
         try await groceryItem.save(on: req.db)
+
+        guard let groceryItemResponse = GroceryItemResponse(groceryItem) else {
+            throw Abort(.internalServerError)
+        }
         
-        return GroceryItem()
-        
+        return groceryItemResponse
     }
     
     func deleteGroceryCategory(req: Request) async throws -> GroceryCategoryResponse {
@@ -77,7 +81,7 @@ class GroceryController: RouteCollection {
         
         try await groceryCategory.delete(on: req.db)
         
-        guard let groceryCategoryResponse = GroceryCategoryResponse(groceryCategory: groceryCategory) else {
+        guard let groceryCategoryResponse = GroceryCategoryResponse(groceryCategory) else {
             throw Abort(.internalServerError)
         }
         
@@ -113,7 +117,7 @@ class GroceryController: RouteCollection {
         
         try await groceryCategory.save(on: req.db)
         
-        guard let groceryCategoryResponse = GroceryCategoryResponse(groceryCategory: groceryCategory) else {
+        guard let groceryCategoryResponse = GroceryCategoryResponse(groceryCategory) else {
             throw Abort(.internalServerError)
         }
         

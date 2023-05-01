@@ -11,7 +11,7 @@ import Fluent
 
 final class GroceryItem: Model, Content {
     
-    static let schema = "grocery-items"
+    static let schema = "grocery_items"
     
     @ID(key: .id)
     var id: UUID?

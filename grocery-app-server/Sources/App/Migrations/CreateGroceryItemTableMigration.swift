@@ -17,7 +17,7 @@ class CreateGroceryItemTableMigration: AsyncMigration {
             .id()
             .field("title", .string, .required)
             .field("price", .double, .required)
-            .field("quantity", .double, .required)
+            .field("quantity", .int, .required)
             .field("grocery_category_id", .uuid, .required, .references("grocery_categories", "id"))
             .create()
     }

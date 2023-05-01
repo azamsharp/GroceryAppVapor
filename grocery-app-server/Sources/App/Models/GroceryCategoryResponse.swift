@@ -17,7 +17,7 @@ struct GroceryCategoryResponse: Content {
 
 extension GroceryCategoryResponse {
     
-    init?(groceryCategory: GroceryCategory) {
+    init?(_ groceryCategory: GroceryCategory) {
         
         guard let id = groceryCategory.id
         else {
