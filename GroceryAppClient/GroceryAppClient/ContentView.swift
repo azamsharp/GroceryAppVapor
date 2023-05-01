@@ -9,15 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let colorCode = "#000080"
+    @State private var text = ""
+    @State private var words: [String] = []
+    
     
     var body: some View {
         VStack {
-           Circle()
-                .fill(Color.fromHex(colorCode))
-                .frame(width: 25, height: 25)
+            Form {
+                TextField("Enter word", text: $text)
+            }.onSubmit {
+                words.append(text)
+                text = ""
+            }
+            List(words, id: \.self) { word in
+                Text(word)
+            }
         }
-        .padding()
     }
 }
 

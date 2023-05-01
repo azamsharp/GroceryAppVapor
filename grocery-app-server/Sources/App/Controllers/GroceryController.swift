@@ -22,7 +22,8 @@ class GroceryController: RouteCollection {
         api.post("grocery-categories", use: saveGroceryCategory)
         // GET: /api/users/:userId/grocery-categories
         api.get(":userId", "grocery-categories", use: getGroceryCategoriesByUser)
-        
+        // DELETE: /api/users/:userId/grocery-categories/:groceryCategoryId
+        api.delete(":userId", "grocery-categories", use: deleteGroceryCategory)
         /*
         // api/users/:userId
         let api = routes.grouped("api", "users", ":userId")
@@ -45,6 +46,8 @@ class GroceryController: RouteCollection {
               let groceryCategoryId = req.parameters.get("groceryCategoryId", as: UUID.self) else {
             throw Abort(.badRequest)
         }
+        
+        
         
         // get the grocery category based on userId and grocery categoryId
         //let groceryCategory = try await GroceryCategory.query(on: req.db)
