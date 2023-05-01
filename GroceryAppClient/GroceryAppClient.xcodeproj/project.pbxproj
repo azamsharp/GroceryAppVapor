@@ -28,6 +28,8 @@
 		8DE9A4D629FE1CC200930ACB /* GroceryDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D529FE1CC200930ACB /* GroceryDetailScreen.swift */; };
 		8DE9A4D829FE215500930ACB /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D729FE215500930ACB /* UserDefaults+Extensions.swift */; };
 		8DE9A4DA29FE9CA700930ACB /* AddGroceryItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D929FE9CA700930ACB /* AddGroceryItemScreen.swift */; };
+		8DE9A4DC2A004ABF00930ACB /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4DB2A004ABF00930ACB /* GroceryItem.swift */; };
+		8DE9A4DE2A00556900930ACB /* GroceryItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4DD2A00556900930ACB /* GroceryItemListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +69,8 @@
 		8DE9A4D529FE1CC200930ACB /* GroceryDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDetailScreen.swift; sourceTree = "<group>"; };
 		8DE9A4D729FE215500930ACB /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		8DE9A4D929FE9CA700930ACB /* AddGroceryItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroceryItemScreen.swift; sourceTree = "<group>"; };
+		8DE9A4DB2A004ABF00930ACB /* GroceryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
+		8DE9A4DD2A00556900930ACB /* GroceryItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GroceryItemListView.swift; path = GroceryAppClient/Models/GroceryItemListView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8B7FE029FC422D00A4BC78 /* ColorSelector.swift */,
+				8DE9A4DD2A00556900930ACB /* GroceryItemListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				8DD94B1B29F71CE600232EBF /* LoginResponse.swift */,
 				348620EE29F95BAF00321D6A /* GroceryCategory.swift */,
 				8D8B7FDE29FC3F8200A4BC78 /* GroceryCategoryRequest.swift */,
+				8DE9A4DB2A004ABF00930ACB /* GroceryItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,7 +283,9 @@
 				8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */,
 				8D8B7FE129FC422D00A4BC78 /* ColorSelector.swift in Sources */,
 				8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */,
+				8DE9A4DE2A00556900930ACB /* GroceryItemListView.swift in Sources */,
 				8DE9A4DA29FE9CA700930ACB /* AddGroceryItemScreen.swift in Sources */,
+				8DE9A4DC2A004ABF00930ACB /* GroceryItem.swift in Sources */,
 				8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

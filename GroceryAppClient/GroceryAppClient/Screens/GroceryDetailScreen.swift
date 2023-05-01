@@ -10,11 +10,17 @@ import SwiftUI
 struct GroceryDetailScreen: View {
     
     @State private var isPresented: Bool = false
+    @EnvironmentObject private var model: GroceryModel
     let groceryCategory: GroceryCategory
     
     var body: some View {
-        Text(groceryCategory.title)
-            .navigationTitle(groceryCategory.title)
+        ZStack {
+            if model.groceryItems.isEmpty {
+                Text("No items found.")
+            } else {
+                GroceryItemListView(groceryItems: model.groceryItems)
+            }
+        }.navigationTitle(groceryCategory.title)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add Grocery Item") {
@@ -27,6 +33,12 @@ struct GroceryDetailScreen: View {
                     AddGroceryItemScreen()
                 }
             }
+            .task {
+                await model.populateGroceryItemsBy(groceryCategoryId: groceryCategory.id!)
+            }
+            .onAppear {
+                model.groceryCategory = groceryCategory
+            }
     }
 }
 
@@ -34,6 +46,7 @@ struct GroceryCategoryDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             GroceryDetailScreen(groceryCategory: GroceryCategory(id: UUID(), title: "Seafood", color: "#2ecc71", userId: UUID()))
+                .environmentObject(GroceryModel())
         }
     }
 }

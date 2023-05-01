@@ -72,6 +72,8 @@ struct RegistrationScreenContainerView: View {
             RegistrationScreen()
                 .navigationDestination(for: Route.self) { route in
                     switch route {
+                        case .register:
+                            RegistrationScreen() 
                         case .login:
                             Text("Login")
                         case .groceryCategoryList:

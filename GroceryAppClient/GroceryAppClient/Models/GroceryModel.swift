@@ -14,12 +14,22 @@ class GroceryModel: ObservableObject {
    
     @Published var lastError: Error? 
     @Published var groceryCategories: [GroceryCategory] = []
+    @Published var groceryItems: [GroceryItem] = []
+    
+    @Published var groceryCategory: GroceryCategory? 
     
     func register(username: String, password: String) async throws -> Bool {
         
         let postData = ["username": username, "password": password]
         let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
         return try await httpClient.load(resource)
+    }
+    
+    func logout() {
+        // delete the username and token from
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "userId")
+        defaults.removeObject(forKey: Constants.Strings.authToken)
     }
     
     func populateGroceryCategories() async {
@@ -35,6 +45,22 @@ class GroceryModel: ObservableObject {
         } catch {
            lastError = error
         }
+    }
+    
+    func populateGroceryItemsBy(groceryCategoryId: UUID) async {
+        
+        guard let userId = UserDefaults.standard.userId else {
+            return
+        }
+        
+        let resource = Resource(url: Constants.Urls.groceryItemsBy(userId: userId, groceryCategoryId: groceryCategoryId), modelType: [GroceryItem].self)
+        print(resource.url)
+        do {
+            groceryItems = try await httpClient.load(resource)
+        } catch {
+            print(error)
+        }
+        
     }
     
     func deleteGroceryCategory(groceryCategoryId: UUID) async throws {
@@ -82,5 +108,19 @@ class GroceryModel: ObservableObject {
         
         let newGroceryCategory = try await httpClient.load(resource)
         groceryCategories.append(newGroceryCategory)
+    }
+    
+    
+    func saveGroceryItem(groceryItem: GroceryItem, groceryCategoryId: UUID) async throws {
+        
+        guard let userId = UserDefaults.standard.userId else {
+            throw NetworkError.badRequest
+        }
+        
+        let resource = try Resource(url: Constants.Urls.saveGroceryItem(userId: userId, groceryCategoryId: groceryCategoryId), method: .post(JSONEncoder().encode(groceryItem)), modelType: GroceryItem.self)
+        
+        let newGroceryItem = try await httpClient.load(resource)
+        groceryItems.append(newGroceryItem)
+        
     }
 }

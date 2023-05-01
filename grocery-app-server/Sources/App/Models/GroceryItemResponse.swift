@@ -9,12 +9,10 @@ import Foundation
 import Vapor
 
 struct GroceryItemResponse: Content {
-    
     let id: UUID
     let title: String
     let price: Double
     let quantity: Int
-    
 }
 
 extension GroceryItemResponse {

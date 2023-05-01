@@ -19,6 +19,7 @@ struct LoginScreen: View {
     private func login() async {
         do {
             let isLoggedIn = try await model.login(username: username, password: password)
+            print(isLoggedIn)
             if isLoggedIn {
                 // take user to the grocery category list screen
                 appState.routes.append(.groceryCategoryList)
@@ -28,16 +29,32 @@ struct LoginScreen: View {
         }
     }
     
+    private var isFormValid: Bool {
+        !username.isEmptyOrWhiteSpace && !password.isEmptyOrWhiteSpace
+    }
+    
     var body: some View {
         Form {
             TextField("Username", text: $username)
                 .textInputAutocapitalization(.never)
             SecureField("Password", text: $password)
-            Button("Login") {
-                Task {
-                    await login()
-                }
+            HStack {
+                
+                Button("Login") {
+                    Task {
+                        await login()
+                    }
+                }.buttonStyle(.borderless)
+                    .disabled(!isFormValid)
+                
+                Spacer()
+                
+                Button("Register") {
+                    appState.routes.append(.register)
+                }.buttonStyle(.borderless)
             }
+            
+           
             
             if let errorMessage {
                 Text(errorMessage)

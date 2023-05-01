@@ -9,6 +9,7 @@ import Foundation
 
 enum Route: Hashable {
     case login
+    case register 
     case groceryCategoryList
     case groceryCategoryDetail(GroceryCategory)
 }

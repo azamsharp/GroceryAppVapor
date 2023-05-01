@@ -11,6 +11,7 @@ struct GroceryCategoryListScreen: View {
     
     @State private var isPresented: Bool = false
     @EnvironmentObject private var model: GroceryModel
+    @EnvironmentObject private var appState: AppState
     
     private func fetchGroceryCategories() async {
         await model.populateGroceryCategories()
@@ -48,8 +49,18 @@ struct GroceryCategoryListScreen: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .navigationTitle("Grocery Categories")
         .toolbar {
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Logout") {
+                    model.logout()
+                    // take the user to the login screen
+                    appState.routes.append(.login)
+                }
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     // action
@@ -76,6 +87,7 @@ struct GroceryListScreen_Previews: PreviewProvider {
         NavigationStack {
             GroceryCategoryListScreen()
                 .environmentObject(GroceryModel())
+                .environmentObject(AppState())
         }
     }
 }
