@@ -72,7 +72,7 @@ class GroceryController: RouteCollection {
             .filter(\.$user.$id == userId)
             .filter(\.$id == groceryCategoryId)
             .first() else {
-            throw Abort(.badRequest)
+            throw Abort(.notFound)
         }
         
         try await groceryCategory.delete(on: req.db)
