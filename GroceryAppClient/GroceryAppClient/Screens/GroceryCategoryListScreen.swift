@@ -27,24 +27,27 @@ struct GroceryCategoryListScreen: View {
     
     var body: some View {
         
-        List {
-            ForEach(model.groceryCategories) { groceryCategory in
-                
-                NavigationLink(value: Route.groceryCategoryDetail(groceryCategory)) {
-                    HStack {
-                        HStack {
-                            Circle()
-                                .fill(Color.fromHex(groceryCategory.color))
-                                .frame(width: 25, height: 25)
-                            Text(groceryCategory.title)
+        ZStack {
+            if model.groceryCategories.isEmpty {
+                Text("No grocery categories found.")
+            } else {
+                List {
+                    ForEach(model.groceryCategories) { groceryCategory in
+                        NavigationLink(value: Route.groceryCategoryDetail(groceryCategory)) {
+                            HStack {
+                                HStack {
+                                    Circle()
+                                        .fill(Color.fromHex(groceryCategory.color))
+                                        .frame(width: 25, height: 25)
+                                    Text(groceryCategory.title)
+                                }
+                            }
                         }
-                    }
+                        
+                    }.onDelete(perform: deleteGroceryCategory)
                 }
-             
-            }.onDelete(perform: deleteGroceryCategory)
+            }
         }
-        
-        
         .navigationTitle("Grocery Categories")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

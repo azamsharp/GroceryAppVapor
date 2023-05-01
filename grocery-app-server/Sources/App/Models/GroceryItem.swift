@@ -28,16 +28,14 @@ final class GroceryItem: Model, Content {
     // refer to the parent
     @Parent(key: "grocery_category_id")
     var groceryCategory: GroceryCategory
-    
-    //@Field(key: "grocery_category_id")
-    //var groceryCategoryId: UUID
-    
+        
     init() { }
     
-    init(id: UUID? = nil, title: String, price: Double, quantity: Int) {
+    init(id: UUID? = nil, title: String, price: Double, quantity: Int, groceryCategoryId: UUID) {
         self.id = id
         self.title = title
         self.price = price
         self.quantity = quantity
+        self.$groceryCategory.id = groceryCategoryId
     }
 }

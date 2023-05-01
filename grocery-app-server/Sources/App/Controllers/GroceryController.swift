@@ -16,28 +16,18 @@ class GroceryController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         
         // /api/users
-        let api = routes.grouped("api", "users")
-        
-        // POST: /api/users/:userId/grocery-categories
-        api.post(":userId", "grocery-categories", use: saveGroceryCategory)
-        // GET: /api/users/:userId/grocery-categories
-        api.get(":userId", "grocery-categories", use: getGroceryCategoriesByUser)
-        // DELETE: /api/users/:userId/grocery-categories/:groceryCategoryId
-        api.delete(":userId", "grocery-categories", ":groceryCategoryId", use: deleteGroceryCategory)
-        /*
-        // api/users/:userId
         let api = routes.grouped("api", "users", ":userId")
         
-        // POST /api/users/:userId/grocery-categories
+        // POST: /api/users/:userId/grocery-categories
         api.post("grocery-categories", use: saveGroceryCategory)
-        // GET /api/users/:userId/grocery-categories
+        // GET: /api/users/:userId/grocery-categories
         api.get("grocery-categories", use: getGroceryCategoriesByUser)
-        // DELETE /api/users/:userId/grocery-categories/:groceryCategoryId
-        //api.delete("grocery-categories", ":groceryCategoryId", use: deleteGroceryCategory)
-        
-        // POST /api/users/:userId/grocery-categories/:groceryCategoryId/grocery-items
+        // DELETE: /api/users/:userId/grocery-categories/:groceryCategoryId
+        api.delete("grocery-categories", ":groceryCategoryId", use: deleteGroceryCategory)
+       
+        // POST: grocery-items
+        // /api/users/:userId/grocery-categories/:groceryCategoryId/grocery-items
         api.post("grocery-categories", ":groceryCategoryId", "grocery-items", use: saveGroceryItem)
-         */
     }
     
     func saveGroceryItem(req: Request) async throws -> GroceryItem {
@@ -47,16 +37,26 @@ class GroceryController: RouteCollection {
             throw Abort(.badRequest)
         }
         
+        // find the user id
+        guard let _ = try await User.find(userId, on: req.db) else {
+            throw Abort(.notFound)
+        }
         
+        // find the grocery category
+        guard let groceryCategory = try await GroceryCategory.query(on: req.db)
+            .filter(\.$user.$id == userId)
+            .filter(\.$id == groceryCategoryId)
+            .first() else {
+            throw Abort(.notFound)
+        }
         
-        // get the grocery category based on userId and grocery categoryId
-        //let groceryCategory = try await GroceryCategory.query(on: req.db)
-          //  .filter(\.$userId == userId)
-            //.filter(\.$id == groceryCategoryId)
-            //.first()
+        let groceryItemRequest = try req.content.decode(GroceryItemRequest.self)
+        let groceryItem = GroceryItem(title: groceryItemRequest.title, price: groceryItemRequest.price, quantity: groceryItemRequest.quantity, groceryCategoryId: groceryCategory.id!)
+        
+        try await groceryItem.save(on: req.db)
         
         return GroceryItem()
-        //return groceryCategory
+        
     }
     
     func deleteGroceryCategory(req: Request) async throws -> GroceryCategoryResponse {
