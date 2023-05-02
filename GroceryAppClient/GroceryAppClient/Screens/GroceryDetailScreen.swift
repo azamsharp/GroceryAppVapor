@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import GroceryAppShared
 
 struct GroceryDetailScreen: View {
     
     @State private var isPresented: Bool = false
     @EnvironmentObject private var model: GroceryModel
-    let groceryCategory: GroceryCategory
+    let groceryCategory: GroceryCategoryResponseDTO
     
     var body: some View {
         ZStack {
@@ -34,7 +35,7 @@ struct GroceryDetailScreen: View {
                 }
             }
             .task {
-                await model.populateGroceryItemsBy(groceryCategoryId: groceryCategory.id!)
+                await model.populateGroceryItemsBy(groceryCategoryId: groceryCategory.id)
             }
             .onAppear {
                 model.groceryCategory = groceryCategory
@@ -42,6 +43,7 @@ struct GroceryDetailScreen: View {
     }
 }
 
+/*
 struct GroceryCategoryDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
@@ -49,4 +51,4 @@ struct GroceryCategoryDetail_Previews: PreviewProvider {
                 .environmentObject(GroceryModel())
         }
     }
-}
+} */

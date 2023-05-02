@@ -13,13 +13,11 @@ class GroceryModel: ObservableObject {
     
     let httpClient = HTTPClient()
    
-    @Published var lastError: Error? 
-    //@Published var groceryCategories: [GroceryCategory] = []
+    @Published var lastError: Error?
     @Published var groceryItems: [GroceryItem] = []
-    
     @Published var groceryCategories: [GroceryCategoryResponseDTO] = []
     
-    @Published var groceryCategory: GroceryCategory? 
+    @Published var groceryCategory: GroceryCategoryResponseDTO? 
     
     func register(username: String, password: String) async throws -> Bool {
  
@@ -74,11 +72,11 @@ class GroceryModel: ObservableObject {
         
         let resource = Resource(url: Constants.Urls.deleteGroceryCategory(userId: userId, groceryCategoryId: groceryCategoryId), method: .delete, modelType: GroceryCategoryResponseDTO.self)
         
-        let groceryCategory: GroceryCategoryResponseDTO = try await httpClient.load(resource)
-        
+        let deletedGroceryCategory = try await httpClient.load(resource)
+        print(deletedGroceryCategory)
         
         // remove the grocery category from the list
-        //groceryCategories = groceryCategories.filter { $0.id != groceryCategory.id }
+        groceryCategories = groceryCategories.filter { $0.id != deletedGroceryCategory.id }
     }
     
     func login(username: String, password: String) async throws -> Bool {

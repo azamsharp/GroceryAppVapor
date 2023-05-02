@@ -2,11 +2,11 @@
   "pins" : [
     {
       "identity" : "groceryappshared",
-      "kind" : "localSourceControl",
-      "location" : "/Users/azamsharp/desktop/GroceryAppShared",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/azamsharp/GroceryAppShared.git",
       "state" : {
         "branch" : "main",
-        "revision" : "947db67a3a26ab1e44f72d984802605ef9f4c3c4"
+        "revision" : "38d24de7713a3f1ed7fc3ad052d6a087f8f99566"
       }
     }
   ],

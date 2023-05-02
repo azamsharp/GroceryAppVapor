@@ -17,16 +17,8 @@ struct AddGroceryCategoryScreen: View {
     
     private func saveGroceryCategory() async {
         
-        // get userId
-        guard let userId = UserDefaults.standard.userId else {
-            return
-        }
-        
         let groceryCategoryRequestDTO = GroceryCategoryRequestDTO(title: title, color: colorCode)
         
-        //let groceryCategoryRequestDTO = GroceryCategoryRequestDTO
-        let groceryCategory = GroceryCategory(title: title, color: colorCode, userId: userId)
-       
         do {
             try await model.saveGroceryCategory(groceryCategoryRequestDTO)
             dismiss()

@@ -28,9 +28,10 @@ struct AddGroceryItemScreen: View {
     
     private func saveGroceryItem() async {
         
-        guard let groceryCategory = model.groceryCategory,
-              let groceryCategoryId = groceryCategory.id
+        guard let groceryCategory = model.groceryCategory
         else { return }
+        
+        let groceryCategoryId = groceryCategory.id
         
         let groceryItem = GroceryItem(title: title, price: price!, quantity: quantity!)
         do {

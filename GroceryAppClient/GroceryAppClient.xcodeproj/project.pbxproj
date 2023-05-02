@@ -13,6 +13,7 @@
 		8D8B7FDD29FC3C3B00A4BC78 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8B7FDC29FC3C3B00A4BC78 /* Color+Extensions.swift */; };
 		8D8B7FE129FC422D00A4BC78 /* ColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8B7FE029FC422D00A4BC78 /* ColorSelector.swift */; };
 		8DD460152A01851400904BA1 /* GroceryCategoryResponseDTO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD460142A01851400904BA1 /* GroceryCategoryResponseDTO+Extensions.swift */; };
+		8DD460182A01920500904BA1 /* GroceryAppShared in Frameworks */ = {isa = PBXBuildFile; productRef = 8DD460172A01920500904BA1 /* GroceryAppShared */; };
 		8DD94AD729F56A8700232EBF /* GroceryAppClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AD629F56A8700232EBF /* GroceryAppClientApp.swift */; };
 		8DD94AD929F56A8700232EBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AD829F56A8700232EBF /* ContentView.swift */; };
 		8DD94ADB29F56A8800232EBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD94ADA29F56A8800232EBF /* Assets.xcassets */; };
@@ -25,7 +26,6 @@
 		8DD94AFB29F703C000232EBF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94AFA29F703C000232EBF /* AppState.swift */; };
 		8DD94B1A29F71A7B00232EBF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1929F71A7B00232EBF /* LoginScreen.swift */; };
 		8DD94B1C29F71CE600232EBF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD94B1B29F71CE600232EBF /* LoginResponse.swift */; };
-		8DDF3DD52A0144BF0007AB6C /* GroceryAppShared in Frameworks */ = {isa = PBXBuildFile; productRef = 8DDF3DD42A0144BF0007AB6C /* GroceryAppShared */; };
 		8DE9A4D629FE1CC200930ACB /* GroceryDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D529FE1CC200930ACB /* GroceryDetailScreen.swift */; };
 		8DE9A4D829FE215500930ACB /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D729FE215500930ACB /* UserDefaults+Extensions.swift */; };
 		8DE9A4DA29FE9CA700930ACB /* AddGroceryItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9A4D929FE9CA700930ACB /* AddGroceryItemScreen.swift */; };
@@ -79,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DDF3DD52A0144BF0007AB6C /* GroceryAppShared in Frameworks */,
+				8DD460182A01920500904BA1 /* GroceryAppShared in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +223,7 @@
 			);
 			name = GroceryAppClient;
 			packageProductDependencies = (
-				8DDF3DD42A0144BF0007AB6C /* GroceryAppShared */,
+				8DD460172A01920500904BA1 /* GroceryAppShared */,
 			);
 			productName = GroceryAppClient;
 			productReference = 8DD94AD329F56A8700232EBF /* GroceryAppClient.app */;
@@ -254,7 +254,7 @@
 			);
 			mainGroup = 8DD94ACA29F56A8600232EBF;
 			packageReferences = (
-				8DDF3DD32A0144BF0007AB6C /* XCRemoteSwiftPackageReference "GroceryAppShared" */,
+				8DD460162A01920500904BA1 /* XCRemoteSwiftPackageReference "GroceryAppShared" */,
 			);
 			productRefGroup = 8DD94AD429F56A8700232EBF /* Products */;
 			projectDirPath = "";
@@ -505,9 +505,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8DDF3DD32A0144BF0007AB6C /* XCRemoteSwiftPackageReference "GroceryAppShared" */ = {
+		8DD460162A01920500904BA1 /* XCRemoteSwiftPackageReference "GroceryAppShared" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/azamsharp/desktop/GroceryAppShared";
+			repositoryURL = "https://github.com/azamsharp/GroceryAppShared.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -516,9 +516,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8DDF3DD42A0144BF0007AB6C /* GroceryAppShared */ = {
+		8DD460172A01920500904BA1 /* GroceryAppShared */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8DDF3DD32A0144BF0007AB6C /* XCRemoteSwiftPackageReference "GroceryAppShared" */;
+			package = 8DD460162A01920500904BA1 /* XCRemoteSwiftPackageReference "GroceryAppShared" */;
 			productName = GroceryAppShared;
 		};
 /* End XCSwiftPackageProductDependency section */
