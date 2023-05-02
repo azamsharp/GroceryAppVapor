@@ -7,7 +7,7 @@
 
 import Foundation
 import GroceryAppShared
-import Vapor 
+import Vapor
 
 extension GroceryCategoryResponseDTO: Content {
     
@@ -19,7 +19,6 @@ extension GroceryCategoryResponseDTO: Content {
         }
         
         self.init(id: id, title: groceryCategory.title, color: groceryCategory.color, noOfItems: 3)
-        
     }
     
 }

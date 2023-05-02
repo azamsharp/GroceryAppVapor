@@ -23,13 +23,11 @@ struct GroceryAppClientApp: App {
             NavigationStack(path: $appState.routes) {
                 
                 Group {
-                    GroceryCategoryListScreen()
-                    /*
                     if token == nil {
                         RegistrationScreen()
                     } else {
                         GroceryCategoryListScreen()
-                    } */
+                    }
                 } .navigationDestination(for: Route.self) { route in
                     switch route {
                         case .register:
