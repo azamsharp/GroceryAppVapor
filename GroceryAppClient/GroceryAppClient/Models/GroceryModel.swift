@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GroceryAppShared
 
 @MainActor
 class GroceryModel: ObservableObject {
@@ -13,13 +14,15 @@ class GroceryModel: ObservableObject {
     let httpClient = HTTPClient()
    
     @Published var lastError: Error? 
-    @Published var groceryCategories: [GroceryCategory] = []
+    //@Published var groceryCategories: [GroceryCategory] = []
     @Published var groceryItems: [GroceryItem] = []
+    
+    @Published var groceryCategories: [GroceryCategoryResponseDTO] = []
     
     @Published var groceryCategory: GroceryCategory? 
     
     func register(username: String, password: String) async throws -> Bool {
-        
+ 
         let postData = ["username": username, "password": password]
         let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
         return try await httpClient.load(resource)
@@ -38,7 +41,7 @@ class GroceryModel: ObservableObject {
             return
         }
         
-        let resource = Resource(url: Constants.Urls.groceryCategoriesBy(userId: userId), modelType: [GroceryCategory].self)
+        let resource = Resource(url: Constants.Urls.groceryCategoriesBy(userId: userId), modelType: [GroceryCategoryResponseDTO].self)
         
         do {
             groceryCategories = try await httpClient.load(resource)
@@ -69,11 +72,13 @@ class GroceryModel: ObservableObject {
             return
         }
         
-        let resource = Resource(url: Constants.Urls.deleteGroceryCategory(userId: userId, groceryCategoryId: groceryCategoryId), method: .delete, modelType: GroceryCategory.self)
+        let resource = Resource(url: Constants.Urls.deleteGroceryCategory(userId: userId, groceryCategoryId: groceryCategoryId), method: .delete, modelType: GroceryCategoryResponseDTO.self)
         
-        let groceryCategory = try await httpClient.load(resource)
+        let groceryCategory: GroceryCategoryResponseDTO = try await httpClient.load(resource)
+        
+        
         // remove the grocery category from the list
-        groceryCategories = groceryCategories.filter { $0.id != groceryCategory.id }
+        //groceryCategories = groceryCategories.filter { $0.id != groceryCategory.id }
     }
     
     func login(username: String, password: String) async throws -> Bool {
@@ -98,13 +103,13 @@ class GroceryModel: ObservableObject {
         }
     }
     
-    func saveGroceryCategory(groceryCategory: GroceryCategory) async throws {
+    func saveGroceryCategory(_ groceryCategoryRequestDTO: GroceryCategoryRequestDTO) async throws {
         
         guard let userId = UserDefaults.standard.userId else {
             throw NetworkError.badRequest
         }
        
-        let resource = try Resource(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId), method: .post(JSONEncoder().encode(groceryCategory)), modelType: GroceryCategory.self)
+        let resource = try Resource(url: Constants.Urls.saveGroceryCategoryByUserId(userId: userId), method: .post(JSONEncoder().encode(groceryCategoryRequestDTO)), modelType: GroceryCategoryResponseDTO.self)
         
         let newGroceryCategory = try await httpClient.load(resource)
         groceryCategories.append(newGroceryCategory)

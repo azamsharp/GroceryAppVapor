@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "groceryappshared",
+      "kind" : "localSourceControl",
+      "location" : "/Users/azamsharp/desktop/GroceryAppShared",
+      "state" : {
+        "branch" : "main",
+        "revision" : "947db67a3a26ab1e44f72d984802605ef9f4c3c4"
+      }
+    }
+  ],
+  "version" : 2
+}

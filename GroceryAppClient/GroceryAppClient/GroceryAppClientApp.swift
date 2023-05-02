@@ -39,7 +39,8 @@ struct GroceryAppClientApp: App {
                         case .groceryCategoryList:
                             GroceryCategoryListScreen()
                         case .groceryCategoryDetail(let groceryCategory):
-                            GroceryDetailScreen(groceryCategory: groceryCategory)
+                            Text("Foo")
+                            //GroceryDetailScreen(groceryCategory: groceryCategory)
                     }
                 }
                    

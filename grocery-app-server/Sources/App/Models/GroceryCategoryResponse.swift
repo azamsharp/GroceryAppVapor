@@ -29,7 +29,8 @@ extension GroceryCategoryResponse {
         self.title = groceryCategory.title
         self.color = groceryCategory.color
         self.userId = groceryCategory.$user.id
-        self.noOfItems = groceryCategory.items.count
+        self.noOfItems = 5 
+        //self.noOfItems = groceryCategory.items.count
     }
 }
 

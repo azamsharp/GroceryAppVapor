@@ -25,8 +25,10 @@ final class GroceryCategory: Model, Content,  Validatable {
     @Parent(key: "user_id")
     var user: User
     
+    /*
     @Children(for: \.$groceryCategory)
     var items: [GroceryItem]
+     */
     
     init() { }
     

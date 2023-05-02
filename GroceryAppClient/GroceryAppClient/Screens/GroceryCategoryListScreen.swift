@@ -18,12 +18,14 @@ struct GroceryCategoryListScreen: View {
     }
     
     private func deleteGroceryCategory(at offsets: IndexSet) {
+        /*
         offsets.forEach { index in
             let groceryCategory = model.groceryCategories[index]
+            
             Task {
                 try await model.deleteGroceryCategory(groceryCategoryId: groceryCategory.id!)
             }
-        }
+        } */
     }
     
     var body: some View {

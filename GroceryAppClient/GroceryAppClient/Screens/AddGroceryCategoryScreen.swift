@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GroceryAppShared
 
 struct AddGroceryCategoryScreen: View {
     
@@ -21,10 +22,13 @@ struct AddGroceryCategoryScreen: View {
             return
         }
         
+        let groceryCategoryRequestDTO = GroceryCategoryRequestDTO(title: title, color: colorCode)
+        
+        //let groceryCategoryRequestDTO = GroceryCategoryRequestDTO
         let groceryCategory = GroceryCategory(title: title, color: colorCode, userId: userId)
        
         do {
-            try await model.saveGroceryCategory(groceryCategory: groceryCategory)
+            try await model.saveGroceryCategory(groceryCategoryRequestDTO)
             dismiss()
         } catch {
             model.lastError = error
