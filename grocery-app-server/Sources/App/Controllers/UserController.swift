@@ -7,6 +7,7 @@
 
 import Vapor
 import Fluent
+import GroceryAppShared
 
 class UserController: RouteCollection {
     
@@ -19,7 +20,7 @@ class UserController: RouteCollection {
         api.post("register", use: register)
     }
     
-    func login(req: Request) async throws -> LoginResponse {
+    func login(req: Request) async throws -> LoginResponseDTO {
         
         // decode it
         let user = try req.content.decode(User.self)
@@ -39,10 +40,11 @@ class UserController: RouteCollection {
         
         // generate the token and put userId in the token
         let authPayload = AuthPayload(userId: existingUser.id!, expiration: .init(value: .distantFuture))
-        return try LoginResponse(error: false, token: req.jwt.sign(authPayload), userId: existingUser.id!)
+        return try LoginResponseDTO(error: false, token: req.jwt.sign(authPayload), userId: existingUser.id!)
+
     }
     
-    func register(req: Request) async throws -> HTTPStatus {
+    func register(req: Request) async throws -> RegisterResponseDTO {
         
         // validate the request
         try User.validate(content: req)
@@ -60,7 +62,7 @@ class UserController: RouteCollection {
         // hash the password
         user.password = try await req.password.async.hash(user.password)
         try await user.save(on: req.db)
-        return .created
+        return RegisterResponseDTO(error: false)
     }
     
 }

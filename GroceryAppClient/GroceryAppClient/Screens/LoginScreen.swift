@@ -25,7 +25,7 @@ struct LoginScreen: View {
                 appState.routes.append(.groceryCategoryList)
             }
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = Constants.Messages.loginError
         }
     }
     
@@ -53,8 +53,6 @@ struct LoginScreen: View {
                     appState.routes.append(.register)
                 }.buttonStyle(.borderless)
             }
-            
-           
             
             if let errorMessage {
                 Text(errorMessage)

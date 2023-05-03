@@ -22,8 +22,9 @@ class GroceryModel: ObservableObject {
     func register(username: String, password: String) async throws -> Bool {
  
         let postData = ["username": username, "password": password]
-        let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: Bool.self)
-        return try await httpClient.load(resource)
+        let resource = try Resource(url: Constants.Urls.register, method: .post(JSONEncoder().encode(postData)), modelType: RegisterResponseDTO.self)
+        let registerResponseDTO = try await httpClient.load(resource)
+        return !registerResponseDTO.error
     }
     
     func logout() {
@@ -85,7 +86,7 @@ class GroceryModel: ObservableObject {
         let loginPostData = ["username": username, "password": password]
         
         // create the resource
-        let resource = try Resource(url: Constants.Urls.login, method: .post(JSONEncoder().encode(loginPostData)), modelType: LoginResponse.self)
+        let resource = try Resource(url: Constants.Urls.login, method: .post(JSONEncoder().encode(loginPostData)), modelType: LoginResponseDTO.self)
         
         // get login response
         let loginResponse = try await httpClient.load(resource)

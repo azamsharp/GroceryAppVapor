@@ -44,6 +44,7 @@ struct Constants {
         static let usernameTaken = "Username is already taken."
         static let unknownError = "Error occured. Please try again later."
         static let groceryCategoryCreationError = "Error creating grocery category."
+        static let loginError = "Unable to login. Please check username and password."
     }
     
 }
