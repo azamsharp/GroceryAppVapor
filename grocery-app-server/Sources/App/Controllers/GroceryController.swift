@@ -33,6 +33,10 @@ class GroceryController: RouteCollection {
         // GET: grocery-items
         // /api/users/:userId/grocery-categories/:groceryCategoryId/grocery-items
         api.get("grocery-categories", ":groceryCategoryId", "grocery-items", use: getGroceryItemsByGroceryCategory)
+        
+        // DELETE: grocery-items
+        // /api/users/:userId/grocery-categories/:groceryCategoryId/grocery-items/:groceryItemId
+        api.delete("grocery-categories", ":groceryCategoryId", "grocery-items", ":groceryItemId", use: deleteGroceryItem)
     }
     
     func getGroceryItemsByGroceryCategory(req: Request) async throws -> [GroceryItemResponseDTO] {
@@ -92,6 +96,45 @@ class GroceryController: RouteCollection {
         }
         
         return groceryItemResponseDTO
+    }
+    
+    
+    // DELETE /api/users/:userId/grocery-categories/:groceryCategoryId/grocery-items/:groceryItemId
+    func deleteGroceryItem(req: Request) async throws -> GroceryItemResponseDTO {
+        
+        // get the id from the route parameters
+        guard let userId = req.parameters.get("userId", as: UUID.self),
+              let groceryCategoryId = req.parameters.get("groceryCategoryId", as: UUID.self),
+              let groceryItemId = req.parameters.get("groceryItemId", as: UUID.self)
+        else {
+            throw Abort(.badRequest)
+        }
+        
+        // make sure the category exists and belongs to the user
+        guard let groceryCategory = try await GroceryCategory.query(on: req.db)
+            .filter(\.$user.$id == userId)
+            .filter(\.$id == groceryCategoryId)
+            .first() else {
+            throw Abort(.notFound)
+        }
+        
+        // make sure that the grocery item exists
+        guard let groceryItem = try await GroceryItem.query(on: req.db)
+            .filter(\.$id == groceryItemId)
+            .filter(\.$groceryCategory.$id == groceryCategory.id!)
+            .first() else {
+            throw Abort(.notFound)
+        }
+        
+        try await groceryItem.delete(on: req.db)
+        
+        // return the deleted grocery item DTO
+        guard let groceryItemResponseDTO = GroceryItemResponseDTO(groceryItem) else {
+            throw Abort(.internalServerError)
+        }
+        
+        return groceryItemResponseDTO
+        
     }
     
     func deleteGroceryCategory(req: Request) async throws -> GroceryCategoryResponseDTO {

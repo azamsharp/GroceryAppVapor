@@ -14,12 +14,22 @@ struct GroceryDetailScreen: View {
     @EnvironmentObject private var model: GroceryModel
     let groceryCategory: GroceryCategoryResponseDTO
     
+    private func deleteGroceryItem(groceryItemId: UUID) {
+        Task {
+            do {
+                try await model.deleteGroceryItem(groceryCategoryId: groceryCategory.id, groceryItemId: groceryItemId)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             if model.groceryItems.isEmpty {
                 Text("No items found.")
             } else {
-                GroceryItemListView(groceryItems: model.groceryItems)
+                GroceryItemListView(groceryItems: model.groceryItems, onDelete: deleteGroceryItem)
             }
         }.navigationTitle(groceryCategory.title)
             .toolbar {
