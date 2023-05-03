@@ -8,6 +8,7 @@
 import Foundation
 import Vapor
 import Fluent
+import JWT
 import GroceryAppShared
 
 
@@ -16,8 +17,8 @@ class GroceryController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        // /api/users/:userId
-        let api = routes.grouped("api", "users", ":userId")
+        // /api/users/:userId [Protected Route]
+        let api = routes.grouped("api", "users", ":userId").grouped(JSONWebTokenAuthenticator())
         
         // POST: /api/users/:userId/grocery-categories
         api.post("grocery-categories", use: saveGroceryCategory)
@@ -165,6 +166,8 @@ class GroceryController: RouteCollection {
     // get grocery categories by user
     func getGroceryCategoriesByUser(req: Request) async throws -> [GroceryCategoryResponseDTO] {
         
+        //let payload = try req.jwt.verify(as: AuthPayload.self)
+       
         // get the id from the route parameters
         guard let userId = req.parameters.get("userId", as: UUID.self) else {
             throw Abort(.badRequest)

@@ -7,29 +7,20 @@
 
 import Foundation
 import JWT
+import Vapor
 
-struct AuthPayload: JWTPayload {
+struct AuthPayload: JWTPayload, Authenticatable {
+    
+    typealias Payload = AuthPayload
     
     enum CodingKeys: String, CodingKey {
-        //case subject = "sub"
         case userId = "uid"
         case expiration = "exp"
-        //case isAdmin = "admin"
     }
-    
-    
-    
-    //var subject: SubjectClaim
-    
-    // userId of the user. This cannot be nil since we are creating the payload it after the user logs in
     var userId: UUID
     var expiration: ExpirationClaim
     
-    //var isAdmin: Bool
-    
     func verify(using signer: JWTSigner) throws {
-        print(self.expiration.value) 
-        
         try self.expiration.verifyNotExpired()
     }
     
