@@ -70,42 +70,49 @@ struct HTTPClient {
     }
     
     func load<T: Codable>(_ resource: Resource<T>) async throws -> T {
-            
-            var request = URLRequest(url: resource.url)
-            
-            switch resource.method {
-                case .post(let data):
-                    request.httpMethod = resource.method.name
-                    request.httpBody = data
-                case .get(let queryItems):
-                    var components = URLComponents(url: resource.url, resolvingAgainstBaseURL: false)
-                    components?.queryItems = queryItems
-                    guard let url = components?.url else {
-                        throw NetworkError.badRequest
-                    }
-                    request = URLRequest(url: url)
-                case .delete:
-                    request.httpMethod = resource.method.name 
-            }
-            
-            // create the URLSession configuration
-            let configuration = URLSessionConfiguration.default
-            // add default headers
-            configuration.httpAdditionalHeaders = defaultHeaders
-            let session = URLSession(configuration: configuration)
-            
-            let (data, response) = try await session.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...201).contains(httpResponse.statusCode)
-            else {
-                throw NetworkError.invalidResponse
-            }
-            
+        
+        var request = URLRequest(url: resource.url)
+        
+        switch resource.method {
+            case .post(let data):
+                request.httpMethod = resource.method.name
+                request.httpBody = data
+            case .get(let queryItems):
+                var components = URLComponents(url: resource.url, resolvingAgainstBaseURL: false)
+                components?.queryItems = queryItems
+                guard let url = components?.url else {
+                    throw NetworkError.badRequest
+                }
+                request = URLRequest(url: url)
+            case .delete:
+                request.httpMethod = resource.method.name
+        }
+        
+        // create the URLSession configuration
+        let configuration = URLSessionConfiguration.default
+        // add default headers
+        configuration.httpAdditionalHeaders = defaultHeaders
+        let session = URLSession(configuration: configuration)
+        
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
+        }
+        
+        // check status codes
+        switch httpResponse.statusCode {
+            case 409:
+                throw NetworkError.serverError("Username is already taken.")
+            default:
+                break
+        }
+        
         guard let result = try? JSONDecoder().decode(resource.modelType, from: data) else {
                 throw NetworkError.decodingError
-            }
-            
-            return result
         }
-
+        
+        return result
+    }
+    
 }
